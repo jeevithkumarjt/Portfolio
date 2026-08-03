@@ -1,10 +1,11 @@
 ﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <rect width="1200" height="630" fill="#0d1117"/>
-  <rect width="1200" height="6" fill="#f26e26" y="0"/>
-  <circle cx="1050" cy="120" r="180" fill="#f26e26" opacity="0.12"/>
-  <circle cx="150" cy="520" r="220" fill="#2dd4bf" opacity="0.1"/>
-  <text x="70" y="270" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Jeevith Kumar R</text>
-  <text x="72" y="340" font-family="JetBrains Mono, monospace" font-size="34" fill="#f26e26">Full Stack Web Developer</text>
-  <text x="72" y="400" font-family="Inter, sans-serif" font-size="26" fill="#8b949e">Responsive websites Â· WordPress Â· Next.js Â· CRM &amp; AI integrations Â· Server deployment</text>
-  <text x="72" y="560" font-family="JetBrains Mono, monospace" font-size="20" fill="#2dd4bf">github.com/jeevithkumarjt</text>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect width="1200" height="8" fill="#2563eb" y="0"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#0ea5e9"/>
+  <circle cx="1030" cy="110" r="190" fill="#2563eb" opacity="0.07"/>
+  <circle cx="140" cy="530" r="230" fill="#0ea5e9" opacity="0.06"/>
+  <text x="70" y="280" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800" fill="#101828">Jeevith Kumar R</text>
+  <text x="72" y="345" font-family="Consolas, monospace" font-size="34" font-weight="600" fill="#2563eb">Full Stack Web Developer</text>
+  <text x="72" y="400" font-family="Inter, Arial, sans-serif" font-size="26" fill="#475467">Responsive websites - WordPress - Next.js - CRM &amp; AI integrations - Server deployment</text>
+  <text x="72" y="560" font-family="Consolas, monospace" font-size="20" fill="#2563eb">github.com/jeevithkumarjt</text>
 </svg>

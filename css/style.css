@@ -1,16 +1,18 @@
 :root {
-  --bg: #0d1117;
-  --bg-alt: #111722;
-  --surface: #161b22;
-  --surface-2: #1c2330;
-  --border: #21262d;
-  --text: #c9d1d9;
-  --text-dim: #8b949e;
-  --accent: #f26e26;
-  --accent-2: #2dd4bf;
-  --white: #ffffff;
-  --radius: 14px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --bg: #ffffff;
+  --bg-alt: #f6f8fc;
+  --surface: #ffffff;
+  --surface-2: #f2f5fa;
+  --border: #e6eaf1;
+  --text: #475467;
+  --text-dim: #667085;
+  --heading: #101828;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #0ea5e9;
+  --shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+  --shadow-hover: 0 14px 34px rgba(16, 24, 40, 0.1);
+  --radius: 12px;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "Cascadia Code", Consolas, "Courier New", monospace;
 }
@@ -65,7 +67,7 @@ svg {
 }
 
 .accent {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 /* Header */
@@ -75,7 +77,7 @@ svg {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(13, 17, 23, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -91,11 +93,11 @@ svg {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.35rem;
-  color: var(--white);
+  color: var(--heading);
 }
 
 .logo-dot {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .nav-links {
@@ -111,7 +113,7 @@ svg {
 }
 
 .nav-link:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .nav-toggle {
@@ -126,7 +128,7 @@ svg {
 .nav-toggle span {
   width: 24px;
   height: 2px;
-  background: var(--text);
+  background: var(--heading);
   transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -144,9 +146,9 @@ svg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(242, 110, 38, 0.18), transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(45, 212, 191, 0.15), transparent 50%),
-    var(--bg);
+    radial-gradient(ellipse at 15% 15%, rgba(37, 99, 235, 0.08), transparent 50%),
+    radial-gradient(ellipse at 85% 80%, rgba(14, 165, 233, 0.08), transparent 50%),
+    linear-gradient(180deg, #fbfcff 0%, #ffffff 100%);
   z-index: -1;
 }
 
@@ -156,36 +158,37 @@ svg {
 
 .hero-eyebrow {
   font-family: var(--font-mono);
-  color: var(--accent-2);
+  color: var(--primary);
   font-size: 1rem;
   margin-bottom: 0.75rem;
   letter-spacing: 1px;
 }
 
 .hero-name {
-  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
   font-weight: 800;
-  color: var(--white);
+  color: var(--heading);
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .hero-role {
   font-family: var(--font-mono);
-  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
-  color: var(--accent);
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--primary);
   margin-bottom: 1.25rem;
   min-height: 2.2rem;
 }
 
 .cursor {
   animation: blink 0.9s step-end infinite;
-  color: var(--accent-2);
+  color: var(--secondary);
 }
 
 .hero-tagline {
   max-width: 640px;
-  color: var(--text-dim);
+  color: var(--text);
   font-size: 1.05rem;
   margin-bottom: 2rem;
 }
@@ -202,30 +205,32 @@ svg {
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 1.75rem;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
   font-size: 0.98rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--white);
+  background: var(--primary);
+  color: #ffffff;
 }
 
 .btn-primary:hover {
+  background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(242, 110, 38, 0.4);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
 .btn-outline {
   border: 1px solid var(--border);
-  color: var(--text);
+  color: var(--heading);
+  background: var(--surface);
 }
 
 .btn-outline:hover {
-  border-color: var(--accent-2);
-  color: var(--accent-2);
+  border-color: var(--primary);
+  color: var(--primary);
   transform: translateY(-2px);
 }
 
@@ -245,10 +250,11 @@ svg {
   padding: 0.5rem 1rem;
   border-radius: 999px;
   font-size: 0.85rem;
+  box-shadow: var(--shadow);
 }
 
 .badge .icon {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 /* Sections */
@@ -264,7 +270,7 @@ svg {
 
 .section-label {
   font-family: var(--font-mono);
-  color: var(--accent-2);
+  color: var(--primary);
   font-size: 0.9rem;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -272,9 +278,10 @@ svg {
 }
 
 .section-title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  color: var(--white);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--heading);
   margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
 }
 
 /* About */
@@ -290,12 +297,14 @@ svg {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem;
-  transition: transform 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
 .about-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
 }
 
 .about-icon {
@@ -306,12 +315,12 @@ svg {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  color: var(--accent);
+  color: var(--primary);
   margin-bottom: 1rem;
 }
 
 .about-card h3 {
-  color: var(--white);
+  color: var(--heading);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
@@ -322,11 +331,11 @@ svg {
 }
 
 .about-quote {
-  border-left: 3px solid var(--accent);
-  background: var(--surface);
+  border-left: 3px solid var(--primary);
+  background: var(--bg-alt);
   padding: 1.25rem 1.5rem;
   border-radius: 0 var(--radius) var(--radius) 0;
-  color: var(--text);
+  color: var(--heading);
   font-style: italic;
   font-size: 1.05rem;
 }
@@ -343,10 +352,11 @@ svg {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
 .skill-category h3 {
-  color: var(--white);
+  color: var(--heading);
   font-size: 1.05rem;
   margin-bottom: 1rem;
   display: flex;
@@ -355,7 +365,7 @@ svg {
 }
 
 .skill-category h3 .icon {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .skill-list {
@@ -369,7 +379,7 @@ svg {
   border: 1px solid var(--border);
   color: var(--text);
   padding: 0.4rem 0.85rem;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 0.85rem;
 }
 
@@ -385,12 +395,14 @@ svg {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem;
-  transition: transform 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent-2);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--secondary);
 }
 
 .project-icon {
@@ -399,9 +411,9 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(242, 110, 38, 0.12);
-  border-radius: 12px;
-  color: var(--accent);
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: 10px;
+  color: var(--primary);
   margin-bottom: 1.1rem;
 }
 
@@ -411,7 +423,7 @@ svg {
 }
 
 .project-card h3 {
-  color: var(--white);
+  color: var(--heading);
   margin-bottom: 0.6rem;
   font-size: 1.15rem;
 }
@@ -431,9 +443,9 @@ svg {
 .project-tags span {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--accent-2);
-  background: rgba(45, 212, 191, 0.1);
-  border: 1px solid rgba(45, 212, 191, 0.25);
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.2);
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
 }
@@ -450,15 +462,16 @@ svg {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem;
+  box-shadow: var(--shadow);
 }
 
 .timeline-item h3 {
-  color: var(--white);
+  color: var(--heading);
   font-size: 1.2rem;
 }
 
 .timeline-org {
-  color: var(--accent);
+  color: var(--primary);
   font-weight: 600;
 }
 
@@ -486,10 +499,11 @@ svg {
   border-radius: var(--radius);
   padding: 1.5rem;
   text-align: center;
+  box-shadow: var(--shadow);
 }
 
 .platforms h3 {
-  color: var(--white);
+  color: var(--heading);
   margin-bottom: 0.5rem;
 }
 
@@ -511,12 +525,14 @@ svg {
   border-radius: var(--radius);
   padding: 2rem;
   text-align: center;
-  transition: transform 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
 }
 
 .stat-card .about-icon {
@@ -527,7 +543,7 @@ svg {
   display: block;
   font-size: 2.4rem;
   font-weight: 800;
-  color: var(--white);
+  color: var(--heading);
   line-height: 1.1;
 }
 
@@ -545,7 +561,7 @@ svg {
 
 /* Contact */
 .contact-text {
-  color: var(--text-dim);
+  color: var(--text);
   font-size: 1.05rem;
   margin-bottom: 2rem;
 }
@@ -562,12 +578,14 @@ svg {
   border-radius: var(--radius);
   padding: 1.75rem;
   text-align: center;
-  transition: transform 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
 .contact-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
 }
 
 .contact-card .about-icon {
@@ -575,7 +593,7 @@ svg {
 }
 
 .contact-card h3 {
-  color: var(--white);
+  color: var(--heading);
   font-size: 1rem;
   margin-bottom: 0.3rem;
 }
@@ -590,7 +608,7 @@ svg {
 .footer {
   border-top: 1px solid var(--border);
   padding: 2.5rem 0;
-  background: var(--bg);
+  background: var(--bg-alt);
 }
 
 .footer-content {
@@ -616,7 +634,7 @@ svg {
 }
 
 .footer-social a:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .footer-social .icon {
@@ -669,6 +687,7 @@ svg {
     padding: 2rem;
     gap: 1.25rem;
     border-left: 1px solid var(--border);
+    box-shadow: var(--shadow-hover);
     transform: translateX(100%);
     transition: transform 0.3s ease;
     height: calc(100vh - 68px);
