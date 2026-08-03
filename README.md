@@ -16,6 +16,7 @@
 
 <a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Email-jeeviaero123%40gmail.com-0d1117?style=flat-square&logo=gmail&logoColor=F26E26" /></a>
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-Connect-0d1117?style=flat-square&logo=linkedin&logoColor=2dd4bf" /></a>
+<a href="https://github.com/jeeviaero123-collab"><img src="https://img.shields.io/badge/GitHub-Profile-0d1117?style=flat-square&logo=github&logoColor=2dd4bf" /></a>
 <img src="https://img.shields.io/badge/Location-Tamil%20Nadu%2C%20India-0d1117?style=flat-square&logo=googlemaps&logoColor=F26E26" />
 <img src="https://komarev.com/ghpvc/?username=jeeviaero123-collab&style=flat-square&color=f26e26&label=Profile+Views" />
 
@@ -23,7 +24,7 @@
 
 <br/>
 
-## About me
+## About Me
 
 I'm a results-driven **Associate Full Stack Web Developer** with 4+ years of professional experience building scalable websites, enterprise platforms, and AI-powered web applications.
 
@@ -38,28 +39,29 @@ Currently exploring **AI agents, RAG pipelines, and system design** — leveling
 
 <br/>
 
-## Enterprise experience
-
-Contributed to enterprise-level web applications and digital platforms, including:
+## Skills
 
 <div align="center">
 
-| Platform | My contributions |
-|---|---|
-| **Tryvium AI** | WordPress development, CRM integration, form pipelines, AI chatbot |
-| **Eprotech AI** | Server configuration, deployment, API integration, SEO |
-| **Sensiple** | WordPress platform maintenance, performance optimization |
-| **CloudSens AI** | Dynamic pages, landing pages, CMS development |
-| **Quinovate AI** | WordPress development, feature pages, maintenance |
-| **Phifix** | WordPress development, content platform maintenance |
+`Full Stack Development` `Responsive Design` `WordPress` `Server Administration`
+`Performance Optimization` `Technical SEO` `API Development` `CRM Integration`
+`Production Debugging` `AI Integration` `Clean Code` `Problem Solving`
 
 </div>
 
-Responsibilities across these platforms: performance optimization · WordPress development · dynamic & landing pages · server configuration & deployment · CRM integration (Power Apps / Dynamics 365) · API integration · AI chatbot integration · SEO · maintenance · debugging · security.
+| Area | Skills |
+|---|---|
+| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap, Tailwind CSS, jQuery |
+| **Backend** | PHP, Next.js, Node.js, MySQL, REST APIs |
+| **CMS** | WordPress, Elementor Pro, WPBakery, WooCommerce, JetEngine |
+| **Server & DevOps** | Apache, Linux, cPanel/WHM, SSL/DNS, PuTTY/WinSCP |
+| **Performance & SEO** | Core Web Vitals, Lighthouse, Technical SEO, PageSpeed Optimization |
+| **AI** | OpenAI API, RAG Pipelines, LLM Integration, Prompt Engineering, AI Chatbots |
+| **Tools** | Git, VS Code, Postman, Figma, Photoshop |
 
 <br/>
 
-## Tech stack
+## Tech Stack
 
 <div align="center">
 
@@ -122,7 +124,45 @@ Responsibilities across these platforms: performance optimization · WordPress d
 
 <br/>
 
-## Work experience
+## Projects
+
+<div align="center">
+
+| Project | Description | Stack |
+|---|---|---|
+| **AI Chatbot & RAG Assistant** | AI-powered chatbot with RAG pipelines and LLM integration for enterprise support | OpenAI, RAG, WordPress |
+| **Voice Interaction Widget** | Embeddable voice widget enabling speech-driven website interactions | JavaScript, Voice UI |
+| **WordPress TOC All-in-One** | Table-of-contents solution with viewport triggers and block styling | WordPress, PHP, CSS |
+| **SaaS Carousel Components** | Reusable SaaS showcase carousels for marketing pages | HTML, CSS, JS |
+| **Jobs Board Platform** | Full job board with listing and application APIs | PHP, MySQL, REST |
+| **Enterprise Landing Pages** | High-converting landing & feature pages for SaaS/B2B/AI platforms | WordPress, Elementor |
+
+</div>
+
+<br/>
+
+## Enterprise Experience
+
+Contributed to enterprise-level web applications and digital platforms, including:
+
+<div align="center">
+
+| Platform | My contributions |
+|---|---|
+| **Tryvium AI** | WordPress development, CRM integration, form pipelines, AI chatbot |
+| **Eprotech AI** | Server configuration, deployment, API integration, SEO |
+| **Sensiple** | WordPress platform maintenance, performance optimization |
+| **CloudSens AI** | Dynamic pages, landing pages, CMS development |
+| **Quinovate AI** | WordPress development, feature pages, maintenance |
+| **Phifix** | WordPress development, content platform maintenance |
+
+</div>
+
+Responsibilities across these platforms: performance optimization · WordPress development · dynamic & landing pages · server configuration & deployment · CRM integration (Power Apps / Dynamics 365) · API integration · AI chatbot integration · SEO · maintenance · debugging · security.
+
+<br/>
+
+## Work Experience
 
 **Associate Web Developer** — Sensiple Software Solution · *Mar 2025 – Present*
 - Lead complete website development — requirement gathering through deployment
@@ -137,31 +177,7 @@ Responsibilities across these platforms: performance optimization · WordPress d
 
 <br/>
 
-## Currently learning
-
-```text
-[■■■■■■■■□□] AI Agents & Advanced RAG Pipelines
-[■■■■■■□□□□] Advanced Next.js
-[■■■□□□□□□□] Docker & CI/CD
-[■■■□□□□□□□] Cloud Deployment
-[■■■■□□□□□□] System Design
-```
-
-<br/>
-
-## Key strengths
-
-<div align="center">
-
-`Full Stack Development` `Server Administration` `Performance Optimization` `SEO`
-`API Development` `CRM Integration` `Production Debugging` `Responsive Design`
-`Clean Code` `AI Integration` `Problem Solving`
-
-</div>
-
-<br/>
-
-## GitHub stats
+## GitHub Stats
 
 <div align="center">
 
@@ -178,18 +194,22 @@ Responsibilities across these platforms: performance optimization · WordPress d
 
 <br/>
 
-<!--
-Snake contribution animation — requires a one-time GitHub Actions setup in this profile repo.
-See: https://github.com/Platane/snk — add the workflow below to .github/workflows/snake.yml
-then reference the generated asset here:
-<img src="https://raw.githubusercontent.com/jeeviaero123-collab/jeeviaero123-collab/output/github-contribution-grid-snake-dark.svg" />
--->
+## Contact
 
-## Connect with me
+I'm open to full-time roles, freelance work, and interesting collaborations.
+
+- **Email:** [jeeviaero123@gmail.com](mailto:jeeviaero123@gmail.com)
+- **LinkedIn:** [Jeevithkumar R](https://www.linkedin.com/in/jeevithkumar-r-24a78017b)
+- **GitHub:** [jeeviaero123-collab](https://github.com/jeeviaero123-collab)
+
+<br/>
+
+## Social Links
 
 <div align="center">
 
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<a href="https://github.com/jeeviaero123-collab"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
 <a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 
 <br/><br/>
