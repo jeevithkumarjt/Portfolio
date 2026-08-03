@@ -125,7 +125,7 @@ textarea {
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   line-height: 1.12;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.2px;
   text-wrap: balance;
 }
 
@@ -616,7 +616,7 @@ main,
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.2px;
 }
 
 .logo-mark {
@@ -805,7 +805,7 @@ main,
   font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.2px;
   color: var(--text);
 }
 
@@ -895,7 +895,7 @@ main,
   font-size: var(--text-2xl);
   font-weight: 700;
   line-height: 1.03;
-  letter-spacing: -0.035em;
+  letter-spacing: 0.2px;
 }
 
 .hero-title .line {
@@ -1044,7 +1044,7 @@ main,
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.2px;
 }
 
 .info-role {
@@ -1264,7 +1264,7 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   margin-top: 1rem;
   font-size: var(--text-xl);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.2px;
 }
 
 .section-lead {
@@ -1704,7 +1704,7 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
 
 .project-title {
   font-size: 1.9rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.2px;
 }
 
 .project-desc {
@@ -2213,7 +2213,7 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   font-size: clamp(7rem, 22vw, 21rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.2px;
   color: var(--text);
   opacity: 0.05;
   white-space: nowrap;
