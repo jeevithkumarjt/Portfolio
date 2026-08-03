@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8"><stop offset="0" stop-color="#22d3ee" stop-opacity="0.45"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0a0c14"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+  <g stroke="#ffffff" stroke-opacity="0.035"><path d="M0 100h800M0 200h800M0 300h800M0 400h800"/><path d="M160 0v500M320 0v500M480 0v500M640 0v500"/></g>
+  <g fill="none" stroke="url(#acc)" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" transform="translate(400,240)">
+    <path d="M-160 40 V0 M-80 70 V-40 M0 50 V-30 M80 80 V-50 M160 40 V10"/>
+    <path d="M-120 -80 a60 60 0 0 1 120 0 M-60 -130 a110 110 0 0 1 120 0"/>
+  </g>
+  <circle cx="400" cy="250" r="5" fill="#67e8f9"/>
+  <rect x="330" y="430" width="140" height="4" rx="2" fill="url(#acc)"/>
+  <circle cx="680" cy="120" r="4" fill="#a855f7"/>
+</svg>
