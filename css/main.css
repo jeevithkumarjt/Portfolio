@@ -1598,6 +1598,14 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   border: 1px solid var(--glass-border);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.project-overlay:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
 }
 
 .project:hover .project-overlay {
@@ -2147,9 +2155,10 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
 
 .footer {
   position: relative;
-  padding: 3.5rem 0 4.5rem;
+  padding: 5rem 0 3rem;
   border-top: 1px solid var(--border);
   background: var(--surface-2);
+  overflow: hidden;
 }
 
 .footer::before {
@@ -2162,22 +2171,113 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   background: var(--grad-line);
 }
 
-.footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+/* Giant faded wordmark behind the footer content */
+.footer-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: -0.28em;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 22vw, 21rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  opacity: 0.05;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
 }
 
-.footer-note {
-  font-size: 0.88rem;
+.footer-wordmark span {
+  color: var(--orange);
+  opacity: 0.9;
+}
+
+.footer-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.footer-col .logo {
+  margin-bottom: 1.2rem;
+}
+
+.footer-tagline {
+  max-width: 34ch;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.chip-available {
+  margin-top: 1.4rem;
+}
+
+.footer-title {
+  margin-bottom: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--text-3);
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.footer-links a {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  transition: color 0.25s, transform 0.25s var(--ease-out);
+}
+
+.footer-links a:hover {
+  color: var(--blue);
+  transform: translateX(4px);
+}
+
+.footer-contact {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.footer-contact a,
+.footer-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  transition: color 0.25s;
+}
+
+.footer-contact a:hover {
+  color: var(--blue);
+}
+
+.footer-contact .icon,
+.footer-loc .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .footer-social {
   display: flex;
   gap: 0.5rem;
+  margin-top: 1.4rem;
 }
 
 .footer-social .btn-icon {
@@ -2263,9 +2363,24 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   stroke-linejoin: round;
 }
 
+.footer-bottom {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.6rem;
+  border-top: 1px dashed var(--border);
+}
+
+.footer-note {
+  font-size: 0.88rem;
+  color: var(--text-3);
+}
+
 .footer-end {
-  margin-top: 2rem;
-  text-align: center;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.18em;
@@ -2453,6 +2568,15 @@ html:not(.js) .skill-bar i {
   .about-grid {
     grid-template-columns: 1fr;
   }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Tablets */
@@ -2495,9 +2619,31 @@ html:not(.js) .skill-bar i {
     grid-template-columns: 1fr;
   }
 
-  .footer-inner {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-brand .chip {
+    margin-inline: auto;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer-links a:hover {
+    transform: none;
   }
 }
 
