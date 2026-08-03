@@ -1,19 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
   <defs>
-    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e879f9"/><stop offset="1" stop-color="#818cf8"/></linearGradient>
-    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8"><stop offset="0" stop-color="#e879f9" stop-opacity="0.4"/><stop offset="1" stop-color="#e879f9" stop-opacity="0"/></radialGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#294199"/>
+      <stop offset="0.55" stop-color="#4361ee"/>
+      <stop offset="1" stop-color="#f26e26"/>
+    </linearGradient>
+    <radialGradient id="blob" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#4361ee" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#4361ee" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="800" height="500" fill="#0a0c14"/>
-  <rect width="800" height="500" fill="url(#glow)"/>
-  <g stroke="#ffffff" stroke-opacity="0.035"><path d="M0 100h800M0 200h800M0 300h800M0 400h800"/><path d="M160 0v500M320 0v500M480 0v500M640 0v500"/></g>
-  <g transform="translate(400,245)" fill="none" stroke="url(#acc)" stroke-opacity="0.55" stroke-width="2.5" stroke-linejoin="round">
-    <rect x="-155" y="-90" width="310" height="180" rx="12"/>
-    <circle cx="-115" cy="-48" r="10"/>
-    <circle cx="-62" cy="-48" r="10"/>
-    <circle cx="-9" cy="-48" r="10"/>
-    <path d="M-95 80 V25 H60 V80"/>
-    <path d="M-115 -20 h200 M-115 10 h160 M-115 40 h120"/>
-  </g>
-  <rect x="330" y="430" width="140" height="4" rx="2" fill="url(#acc)"/>
-  <circle cx="120" cy="380" r="4" fill="#e879f9"/>
+  <rect width="800" height="500" fill="#eef0f7"/>
+  <rect x="40" y="28" width="720" height="444" rx="22" fill="#ffffff"/>
+  <rect x="40" y="28" width="720" height="444" rx="22" fill="none" stroke="#dde1ee"/>
+  <rect x="40" y="28" width="720" height="444" rx="22" fill="url(#blob)"/>
+  <rect x="90" y="80" width="110" height="22" rx="11" fill="#ffffff" stroke="#dde1ee"/>
+  <rect x="610" y="80" width="100" height="26" rx="13" fill="url(#g)"/>
+  <rect x="90" y="140" width="360" height="26" rx="13" fill="#eef0f7"/>
+  <rect x="90" y="196" width="420" height="46" rx="10" fill="#111827"/>
+  <rect x="90" y="258" width="470" height="16" rx="8" fill="#c3cad9"/>
+  <rect x="90" y="286" width="430" height="16" rx="8" fill="#c3cad9"/>
+  <rect x="90" y="336" width="180" height="44" rx="22" fill="url(#g)"/>
+  <rect x="600" y="210" width="120" height="120" rx="60" fill="#ffffff" stroke="#dde1ee"/>
+  <circle cx="660" cy="270" r="40" fill="url(#g)"/>
+  <text x="660" y="278" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#ffffff">A</text>
 </svg>
