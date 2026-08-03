@@ -63,7 +63,7 @@
   --shadow-accent: 0 16px 44px -20px rgba(242, 110, 38, 0.55);
 
   /* ---- Typography ---- */
-  --font-display: "Nunito", "Google Sans Text", "Google Sans", Roboto, Arial, sans-serif;
+  --font-display: "Google Sans Text", "Google Sans", Roboto, Arial, sans-serif;
   --font-body: "Nunito", "Comic Sans MS", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
   --text-2xl: clamp(2.6rem, 6.4vw, 5.2rem);
