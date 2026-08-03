@@ -1,0 +1,327 @@
+/* ============================================================
+   RESUME STYLESHEET — Jeevith Kumar R / Portfolio
+   ------------------------------------------------------------
+   Adds the printable document layout on top of tokens.css +
+   main.css. Reuses the design system for nav, buttons, glass.
+   ============================================================ */
+
+.resume-main {
+  padding-top: calc(var(--header-h) + 3rem);
+  padding-bottom: var(--space-6);
+}
+
+.resume-doc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-2);
+  padding: clamp(1.8rem, 5vw, 3.5rem);
+  overflow: hidden;
+}
+
+/* ---- Head ---- */
+.resume-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 2px solid var(--blue);
+}
+
+.resume-name {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.resume-role {
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.resume-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-2);
+}
+
+.resume-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.25s;
+}
+
+.resume-contact a:hover {
+  color: var(--blue);
+}
+
+.resume-contact .icon {
+  width: 0.95em;
+  height: 0.95em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- Blocks ---- */
+.resume-block {
+  margin-top: 2rem;
+}
+
+.resume-block-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.1rem;
+}
+
+.resume-block-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--grad-line);
+}
+
+.resume-summary {
+  font-size: 0.97rem;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 60rem;
+}
+
+/* ---- Skills ---- */
+.resume-skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 2rem;
+}
+
+.resume-skill {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 0.92rem;
+  color: var(--text-2);
+}
+
+.resume-skill b {
+  flex-shrink: 0;
+  min-width: 9.5rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---- Experience ---- */
+.resume-job {
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px dashed var(--border-2);
+}
+
+.resume-job:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.resume-job-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.resume-job h3 {
+  font-size: 1.05rem;
+}
+
+.resume-job .org {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.resume-job .when {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.resume-job ul {
+  margin: 0.6rem 0 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.resume-job li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--text-2);
+}
+
+.resume-job li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* ---- Projects ---- */
+.resume-proj {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) 1fr;
+  gap: 0.2rem 1.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.resume-proj b {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.resume-proj .meta {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--orange);
+}
+
+.resume-proj p {
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+/* ---- Footer note ---- */
+.resume-note {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.resume-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .resume-skills {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-head {
+    flex-direction: column;
+  }
+
+  .resume-proj {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #ffffff;
+    --surface-3: #eef0ec;
+    --text: #111827;
+    --text-2: #46516a;
+    --text-3: #7a8499;
+    --border: #e3e6ef;
+    --border-2: #c9cfdc;
+    --blue: #294199;
+    --orange: #f26e26;
+    --grad-text: linear-gradient(92deg, #294199 0%, #4361ee 45%, #f26e26 110%);
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff;
+  }
+
+  body {
+    font-size: 12px;
+  }
+
+  .site-nav,
+  .reading-progress,
+  .cursor-dot,
+  .cursor-ring,
+  .bg,
+  .preloader,
+  .page-overlay,
+  .back-top,
+  .resume-toolbar,
+  .footer {
+    display: none !important;
+  }
+
+  .resume-main {
+    padding: 0;
+  }
+
+  .resume-doc {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .resume-block {
+    margin-top: 1.2rem;
+    break-inside: avoid;
+  }
+
+  .resume-job {
+    break-inside: avoid;
+  }
+}
+
+@page {
+  margin: 14mm 12mm;
+}

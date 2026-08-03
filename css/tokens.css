@@ -1,0 +1,202 @@
+/* ============================================================
+   DESIGN TOKENS — Jeevith Kumar R / Portfolio
+   ------------------------------------------------------------
+   Single source of truth for color, type, spacing, elevation,
+   radius, motion and glass. Two complete themes live here:
+     • Light (default, warm-white editorial)
+     • Dark  (near-black graphite, ambient)
+   Theme is switched by setting data-theme="dark" on <html>.
+   A media-query fallback serves prefers-color-scheme users when
+   no explicit theme is set (e.g. JavaScript disabled).
+   ============================================================ */
+
+:root {
+  /* ---- Surfaces & text (Light) ---- */
+  --bg: #f6f6f3;
+  --bg-2: #eef0ec;
+  --surface: #ffffff;
+  --surface-2: #fbfbf9;
+  --surface-3: #f0f1ed;
+  --text: #171a21;
+  --text-2: #4d5564;
+  --text-3: #8c93a1;
+  --border: rgba(23, 26, 33, 0.09);
+  --border-2: rgba(23, 26, 33, 0.18);
+
+  /* ---- Brand: blue + orange duo ---- */
+  --blue: #294199;
+  --blue-2: #4361ee;
+  --blue-soft: rgba(41, 65, 153, 0.09);
+  --orange: #f26e26;
+  --orange-2: #ff9557;
+  --orange-soft: rgba(242, 110, 38, 0.11);
+  --green: #16a34a;
+
+  /* ---- Gradients ---- */
+  --grad: linear-gradient(135deg, #294199 0%, #4361ee 55%, #6a8bff 100%);
+  --grad-accent: linear-gradient(135deg, #f26e26 0%, #ff9557 100%);
+  --grad-text: linear-gradient(92deg, #294199 0%, #4361ee 45%, #f26e26 110%);
+  --grad-ring: linear-gradient(135deg, #294199 0%, #4361ee 45%, #f26e26 100%);
+  --grad-line: linear-gradient(90deg, transparent, rgba(41, 65, 153, 0.35), rgba(242, 110, 38, 0.35), transparent);
+
+  /* ---- Ambient light (background system) ---- */
+  --glow-blue: rgba(41, 65, 153, 0.16);
+  --glow-orange: rgba(242, 110, 38, 0.13);
+  --mesh-a: rgba(67, 97, 238, 0.16);
+  --mesh-b: rgba(242, 110, 38, 0.12);
+  --mesh-c: rgba(106, 139, 255, 0.12);
+  --vignette: rgba(23, 26, 33, 0.06);
+  --noise-opacity: 0.05;
+
+  /* ---- Glass (used sparingly) ---- */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-strong: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-edge: rgba(23, 26, 33, 0.08);
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-shadow: 0 24px 70px -30px rgba(23, 26, 33, 0.3);
+
+  /* ---- Elevation ---- */
+  --shadow-1: 0 1px 2px rgba(23, 26, 33, 0.04), 0 10px 30px -18px rgba(23, 26, 33, 0.18);
+  --shadow-2: 0 24px 70px -30px rgba(23, 26, 33, 0.3);
+  --shadow-brand: 0 16px 44px -20px rgba(41, 65, 153, 0.5);
+  --shadow-accent: 0 16px 44px -20px rgba(242, 110, 38, 0.55);
+
+  /* ---- Typography ---- */
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --text-2xl: clamp(2.6rem, 6.4vw, 5.2rem);
+  --text-xl: clamp(2rem, 4.4vw, 3.4rem);
+  --text-lg: clamp(1.25rem, 2vw, 1.6rem);
+  --text-base: 1rem;
+  --text-sm: 0.9rem;
+  --text-xs: 0.8rem;
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.6rem;
+  --space-4: 2.4rem;
+  --space-5: 4rem;
+  --space-6: 6.4rem;
+
+  /* ---- Radius ---- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-full: 999px;
+
+  /* ---- Layout ---- */
+  --container: 1180px;
+  --container-narrow: 860px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 72px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.5, 0, 0.4, 1);
+  --dur-fast: 0.24s;
+  --dur: 0.45s;
+  --dur-slow: 0.8s;
+
+  /* ---- Focus ---- */
+  --focus-ring: 3px solid var(--orange);
+}
+
+/* ---- Dark theme (explicit) ---- */
+[data-theme="dark"] {
+  --bg: #0a0b10;
+  --bg-2: #0e1018;
+  --surface: #131520;
+  --surface-2: #0f1118;
+  --surface-3: #191c27;
+  --text: #f2f3f8;
+  --text-2: #a8aebd;
+  --text-3: #6d7484;
+  --border: rgba(242, 243, 248, 0.09);
+  --border-2: rgba(242, 243, 248, 0.17);
+
+  --blue: #5b8bff;
+  --blue-2: #7da4ff;
+  --blue-soft: rgba(91, 139, 255, 0.13);
+  --orange: #f26e26;
+  --orange-2: #ff9557;
+  --orange-soft: rgba(242, 110, 38, 0.14);
+  --green: #34d399;
+
+  --grad: linear-gradient(135deg, #5b8bff 0%, #7da4ff 55%, #a7c0ff 100%);
+  --grad-accent: linear-gradient(135deg, #f26e26 0%, #ff9557 100%);
+  --grad-text: linear-gradient(92deg, #7da4ff 0%, #5b8bff 40%, #f26e26 118%);
+  --grad-ring: linear-gradient(135deg, #5b8bff 0%, #7da4ff 42%, #f26e26 100%);
+  --grad-line: linear-gradient(90deg, transparent, rgba(91, 139, 255, 0.4), rgba(242, 110, 38, 0.4), transparent);
+
+  --glow-blue: rgba(91, 139, 255, 0.2);
+  --glow-orange: rgba(242, 110, 38, 0.16);
+  --mesh-a: rgba(91, 139, 255, 0.14);
+  --mesh-b: rgba(242, 110, 38, 0.11);
+  --mesh-c: rgba(125, 164, 255, 0.1);
+  --vignette: rgba(0, 0, 0, 0.5);
+  --noise-opacity: 0.05;
+
+  --glass-bg: rgba(16, 18, 26, 0.55);
+  --glass-bg-strong: rgba(16, 18, 26, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-edge: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 24px 80px -30px rgba(0, 0, 0, 0.65);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -18px rgba(0, 0, 0, 0.6);
+  --shadow-2: 0 30px 80px -32px rgba(0, 0, 0, 0.75);
+  --shadow-brand: 0 16px 48px -18px rgba(91, 139, 255, 0.45);
+  --shadow-accent: 0 16px 48px -18px rgba(242, 110, 38, 0.45);
+}
+
+/* ---- Dark theme fallback for no-JS users who prefer dark ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0a0b10;
+    --bg-2: #0e1018;
+    --surface: #131520;
+    --surface-2: #0f1118;
+    --surface-3: #191c27;
+    --text: #f2f3f8;
+    --text-2: #a8aebd;
+    --text-3: #6d7484;
+    --border: rgba(242, 243, 248, 0.09);
+    --border-2: rgba(242, 243, 248, 0.17);
+
+    --blue: #5b8bff;
+    --blue-2: #7da4ff;
+    --blue-soft: rgba(91, 139, 255, 0.13);
+    --orange: #f26e26;
+    --orange-2: #ff9557;
+    --orange-soft: rgba(242, 110, 38, 0.14);
+    --green: #34d399;
+
+    --grad: linear-gradient(135deg, #5b8bff 0%, #7da4ff 55%, #a7c0ff 100%);
+    --grad-accent: linear-gradient(135deg, #f26e26 0%, #ff9557 100%);
+    --grad-text: linear-gradient(92deg, #7da4ff 0%, #5b8bff 40%, #f26e26 118%);
+    --grad-ring: linear-gradient(135deg, #5b8bff 0%, #7da4ff 42%, #f26e26 100%);
+    --grad-line: linear-gradient(90deg, transparent, rgba(91, 139, 255, 0.4), rgba(242, 110, 38, 0.4), transparent);
+
+    --glow-blue: rgba(91, 139, 255, 0.2);
+    --glow-orange: rgba(242, 110, 38, 0.16);
+    --mesh-a: rgba(91, 139, 255, 0.14);
+    --mesh-b: rgba(242, 110, 38, 0.11);
+    --mesh-c: rgba(125, 164, 255, 0.1);
+    --vignette: rgba(0, 0, 0, 0.5);
+    --noise-opacity: 0.05;
+
+    --glass-bg: rgba(16, 18, 26, 0.55);
+    --glass-bg-strong: rgba(16, 18, 26, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-edge: rgba(255, 255, 255, 0.09);
+    --glass-shadow: 0 24px 80px -30px rgba(0, 0, 0, 0.65);
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -18px rgba(0, 0, 0, 0.6);
+    --shadow-2: 0 30px 80px -32px rgba(0, 0, 0, 0.75);
+    --shadow-brand: 0 16px 48px -18px rgba(91, 139, 255, 0.45);
+    --shadow-accent: 0 16px 48px -18px rgba(242, 110, 38, 0.45);
+  }
+}
