@@ -400,6 +400,7 @@
     if (reduceMotion) return;
     var target = parseFloat(el.getAttribute('data-count')) || 0;
     var state = { v: 0 };
+    el.textContent = '0';
     gsap.to(state, {
       v: target,
       duration: 1.8,
@@ -413,7 +414,7 @@
   $$('.skill-bar i').forEach(function (bar) {
     if (reduceMotion) return;
     var p = parseFloat(bar.style.getPropertyValue('--p')) || 0;
-    gsap.to(bar, {
+    gsap.fromTo(bar, { scaleX: 0 }, {
       scaleX: p,
       duration: 1.3,
       ease: 'power3.out',
@@ -423,12 +424,14 @@
 
   /* ---------- Stat rings ---------- */
   $$('.stat-ring .ring-fg').forEach(function (ring) {
+    var pct = parseFloat(ring.getAttribute('data-ring')) || 100;
+    var targetOffset = (1 - pct / 100) * 326.7;
     if (reduceMotion) {
-      ring.style.strokeDashoffset = '0';
+      ring.style.strokeDashoffset = targetOffset.toFixed(2) + 'px';
       return;
     }
-    gsap.to(ring, {
-      strokeDashoffset: 0,
+    gsap.fromTo(ring, { strokeDashoffset: 326.7 }, {
+      strokeDashoffset: targetOffset,
       duration: 1.6,
       ease: 'power2.out',
       scrollTrigger: { trigger: ring, start: 'top 88%', once: true }

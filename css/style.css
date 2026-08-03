@@ -153,6 +153,14 @@ ol {
   top: 14px;
 }
 
+.svg-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* ---------- Background layers ---------- */
 .bg {
   position: fixed;
@@ -1603,7 +1611,7 @@ ol {
   height: 100%;
   border-radius: inherit;
   background: var(--grad-ring);
-  transform: scaleX(0);
+  transform: scaleX(var(--p, 1));
   transform-origin: left center;
   will-change: transform;
 }
@@ -1828,9 +1836,16 @@ ol {
   stroke: var(--grad-ring);
   stroke-width: 7;
   stroke-linecap: round;
-  stroke-dasharray: 326.7;
-  stroke-dashoffset: 326.7;
   will-change: stroke-dashoffset;
+}
+
+.stat-ring .ring-fg {
+  stroke-dasharray: 326.7;
+  stroke-dashoffset: 0;
+}
+
+.js .stat-ring .ring-fg {
+  stroke-dashoffset: 326.7;
 }
 
 .stat-num {
@@ -2181,6 +2196,10 @@ ol {
 
   .ring-fg {
     stroke-dashoffset: 0 !important;
+  }
+
+  .skill-bar i {
+    transform: scaleX(var(--p, 1)) !important;
   }
 }
 
