@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Associate%20Full%20Stack%20Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
@@ -16,50 +16,52 @@
 
 <a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Email-jeeviaero123%40gmail.com-0d1117?style=flat-square&logo=gmail&logoColor=F26E26" /></a>
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-Connect-0d1117?style=flat-square&logo=linkedin&logoColor=2dd4bf" /></a>
+<a href="https://github.com/jeevithkumarjt"><img src="https://img.shields.io/badge/GitHub-Profile-0d1117?style=flat-square&logo=github&logoColor=2dd4bf" /></a>
 <img src="https://img.shields.io/badge/Location-Tamil%20Nadu%2C%20India-0d1117?style=flat-square&logo=googlemaps&logoColor=F26E26" />
-<img src="https://komarev.com/ghpvc/?username=jeeviaero123-collab&style=flat-square&color=f26e26&label=Profile+Views" />
+<img src="https://komarev.com/ghpvc/?username=jeevithkumarjt&style=flat-square&color=f26e26&label=Profile+Views" />
 
 </div>
 
 <br/>
 
-## About me
+## About Me
 
 I'm a results-driven **Associate Full Stack Web Developer** with 4+ years of professional experience building scalable websites, enterprise platforms, and AI-powered web applications.
 
-I specialize in complete end-to-end development — from designing responsive interfaces to backend development, server deployment, production debugging, CRM integration, SEO, and AI integrations.
+I specialize in complete end-to-end development â€” from designing responsive interfaces to backend development, server deployment, production debugging, CRM integration, SEO, and AI integrations.
 
 ```
 I don't just build websites.
-I build complete digital products — front end to server, CRM to AI.
+I build complete digital products â€” front end to server, CRM to AI.
 ```
 
-Currently exploring **AI agents, RAG pipelines, and system design** — leveling up from full-stack web development into AI-augmented engineering.
+Currently exploring **AI agents, RAG pipelines, and system design** â€” leveling up from full-stack web development into AI-augmented engineering.
 
 <br/>
 
-## Enterprise experience
-
-Contributed to enterprise-level web applications and digital platforms, including:
+## Skills
 
 <div align="center">
 
-| Platform | My contributions |
-|---|---|
-| **Tryvium AI** | WordPress development, CRM integration, form pipelines, AI chatbot |
-| **Eprotech AI** | Server configuration, deployment, API integration, SEO |
-| **Sensiple** | WordPress platform maintenance, performance optimization |
-| **CloudSens AI** | Dynamic pages, landing pages, CMS development |
-| **Quinovate AI** | WordPress development, feature pages, maintenance |
-| **Phifix** | WordPress development, content platform maintenance |
+`Full Stack Development` `Responsive Design` `WordPress` `Server Administration`
+`Performance Optimization` `Technical SEO` `API Development` `CRM Integration`
+`Production Debugging` `AI Integration` `Clean Code` `Problem Solving`
 
 </div>
 
-Responsibilities across these platforms: performance optimization · WordPress development · dynamic & landing pages · server configuration & deployment · CRM integration (Power Apps / Dynamics 365) · API integration · AI chatbot integration · SEO · maintenance · debugging · security.
+| Area | Skills |
+|---|---|
+| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap, Tailwind CSS, jQuery |
+| **Backend** | PHP, Next.js, Node.js, MySQL, REST APIs |
+| **CMS** | WordPress, Elementor Pro, WPBakery, WooCommerce, JetEngine |
+| **Server & DevOps** | Apache, Linux, cPanel/WHM, SSL/DNS, PuTTY/WinSCP |
+| **Performance & SEO** | Core Web Vitals, Lighthouse, Technical SEO, PageSpeed Optimization |
+| **AI** | OpenAI API, RAG Pipelines, LLM Integration, Prompt Engineering, AI Chatbots |
+| **Tools** | Git, VS Code, Postman, Figma, Photoshop |
 
 <br/>
 
-## Tech stack
+## Tech Stack
 
 <div align="center">
 
@@ -122,79 +124,97 @@ Responsibilities across these platforms: performance optimization · WordPress d
 
 <br/>
 
-## Work experience
+## Projects
 
-**Associate Web Developer** — Sensiple Software Solution · *Mar 2025 – Present*
-- Lead complete website development — requirement gathering through deployment
+<div align="center">
+
+| Project | Description | Stack |
+|---|---|---|
+| **AI Chatbot & RAG Assistant** | AI-powered chatbot with RAG pipelines and LLM integration for enterprise support | OpenAI, RAG, WordPress |
+| **Voice Interaction Widget** | Embeddable voice widget enabling speech-driven website interactions | JavaScript, Voice UI |
+| **WordPress TOC All-in-One** | Table-of-contents solution with viewport triggers and block styling | WordPress, PHP, CSS |
+| **SaaS Carousel Components** | Reusable SaaS showcase carousels for marketing pages | HTML, CSS, JS |
+| **Jobs Board Platform** | Full job board with listing and application APIs | PHP, MySQL, REST |
+| **Enterprise Landing Pages** | High-converting landing & feature pages for SaaS/B2B/AI platforms | WordPress, Elementor |
+
+</div>
+
+<br/>
+
+## Enterprise Experience
+
+Contributed to enterprise-level web applications and digital platforms, including:
+
+<div align="center">
+
+| Platform | My contributions |
+|---|---|
+| **Tryvium AI** | WordPress development, CRM integration, form pipelines, AI chatbot |
+| **Eprotech AI** | Server configuration, deployment, API integration, SEO |
+| **Sensiple** | WordPress platform maintenance, performance optimization |
+| **CloudSens AI** | Dynamic pages, landing pages, CMS development |
+| **Quinovate AI** | WordPress development, feature pages, maintenance |
+| **Phifix** | WordPress development, content platform maintenance |
+
+</div>
+
+Responsibilities across these platforms: performance optimization Â· WordPress development Â· dynamic & landing pages Â· server configuration & deployment Â· CRM integration (Power Apps / Dynamics 365) Â· API integration Â· AI chatbot integration Â· SEO Â· maintenance Â· debugging Â· security.
+
+<br/>
+
+## Work Experience
+
+**Associate Web Developer** â€” Sensiple Software Solution Â· *Mar 2025 â€“ Present*
+- Lead complete website development â€” requirement gathering through deployment
 - Own server setup, deployment, and production debugging
 - Build CRM integrations (Power Apps / Microsoft Dynamics 365) and REST API pipelines
 - Drive performance optimization, SEO, and website maintenance
 
-**Web Developer** — DS Enterprises · *Dec 2023 – Feb 2025*
+**Web Developer** â€” DS Enterprises Â· *Dec 2023 â€“ Feb 2025*
 - Built 20+ responsive HTML websites and 15+ WordPress websites
 - Developed landing pages and dynamic websites with Elementor, WPBakery, JetEngine
 - Delivered performance optimization and UI design work using Photoshop / Illustrator
 
 <br/>
 
-## Currently learning
-
-```text
-[■■■■■■■■□□] AI Agents & Advanced RAG Pipelines
-[■■■■■■□□□□] Advanced Next.js
-[■■■□□□□□□□] Docker & CI/CD
-[■■■□□□□□□□] Cloud Deployment
-[■■■■□□□□□□] System Design
-```
-
-<br/>
-
-## Key strengths
+## GitHub Stats
 
 <div align="center">
 
-`Full Stack Development` `Server Administration` `Performance Optimization` `SEO`
-`API Development` `CRM Integration` `Production Debugging` `Responsive Design`
-`Clean Code` `AI Integration` `Problem Solving`
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=jeevithkumarjt&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=f26e26&icon_color=2dd4bf&text_color=c9d1d9" />
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=jeevithkumarjt&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=f26e26&text_color=c9d1d9" />
+
+<img src="https://streak-stats.demolab.com?user=jeevithkumarjt&theme=tokyonight&hide_border=true&background=0D1117&ring=F26E26&fire=F26E26&currStreakLabel=2DD4BF" />
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=jeevithkumarjt&theme=tokyo-night&bg_color=0d1117&color=2dd4bf&line=f26e26&point=ffffff&hide_border=true" width="100%"/>
+
+<img src="https://github-profile-trophy.vercel.app/?username=jeevithkumarjt&theme=tokyonight&no-frame=true&column=7&margin-w=8&margin-h=8" />
 
 </div>
 
 <br/>
 
-## GitHub stats
+## Contact
 
-<div align="center">
+I'm open to full-time roles, freelance work, and interesting collaborations.
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=jeeviaero123-collab&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=f26e26&icon_color=2dd4bf&text_color=c9d1d9" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=jeeviaero123-collab&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=f26e26&text_color=c9d1d9" />
-
-<img src="https://streak-stats.demolab.com?user=jeeviaero123-collab&theme=tokyonight&hide_border=true&background=0D1117&ring=F26E26&fire=F26E26&currStreakLabel=2DD4BF" />
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=jeeviaero123-collab&theme=tokyo-night&bg_color=0d1117&color=2dd4bf&line=f26e26&point=ffffff&hide_border=true" width="100%"/>
-
-<img src="https://github-profile-trophy.vercel.app/?username=jeeviaero123-collab&theme=tokyonight&no-frame=true&column=7&margin-w=8&margin-h=8" />
-
-</div>
+- **Email:** [jeeviaero123@gmail.com](mailto:jeeviaero123@gmail.com)
+- **LinkedIn:** [Jeevithkumar R](https://www.linkedin.com/in/jeevithkumar-r-24a78017b)
+- **GitHub:** [jeevithkumarjt](https://github.com/jeevithkumarjt)
 
 <br/>
 
-<!--
-Snake contribution animation — requires a one-time GitHub Actions setup in this profile repo.
-See: https://github.com/Platane/snk — add the workflow below to .github/workflows/snake.yml
-then reference the generated asset here:
-<img src="https://raw.githubusercontent.com/jeeviaero123-collab/jeeviaero123-collab/output/github-contribution-grid-snake-dark.svg" />
--->
-
-## Connect with me
+## Social Links
 
 <div align="center">
 
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<a href="https://github.com/jeevithkumarjt"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
 <a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 
 <br/><br/>
 
-> *"Simplicity is the soul of efficiency."* — Austin Freeman
+> *"Simplicity is the soul of efficiency."* â€” Austin Freeman
 
 <br/>
 
