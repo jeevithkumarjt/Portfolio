@@ -1,6 +1,6 @@
-﻿<div align="center">
+<div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Associate%20Full%20Stack%20Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Full%20Stack%20Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b">
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=F26E26&center=true&vCenter=true&width=650&lines=Full+Stack+Developer+%7C+WordPress+%2B+Next.js;Server+Deployment+%26+Production+Debugging;CRM+%2F+API+Integrations+(Dynamics+365);Building+AI+Chatbots+with+RAG+%2B+LLMs;4%2B+Years+%7C+50%2B+Websites+Shipped" alt="Typing SVG" />
@@ -8,16 +8,16 @@
 
 <br/>
 
-<img src="https://img.shields.io/badge/Experience-4%2B%20Years-f26e26?style=for-the-badge&labelColor=0d1117" />
-<img src="https://img.shields.io/badge/Websites%20Delivered-50%2B-2dd4bf?style=for-the-badge&labelColor=0d1117" />
-<img src="https://img.shields.io/badge/Status-Open%20to%20Work-3ecf8e?style=for-the-badge&labelColor=0d1117" />
+<img src="https://img.shields.io/badge/Experience-4%2B%20Years-294199?style=for-the-badge&labelColor=f6f7fb" />
+<img src="https://img.shields.io/badge/Websites%20Delivered-50%2B-4361ee?style=for-the-badge&labelColor=f6f7fb" />
+<img src="https://img.shields.io/badge/Status-Open%20to%20Work-16a34a?style=for-the-badge&labelColor=f6f7fb" />
 
 <br/><br/>
 
-<a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Email-jeeviaero123%40gmail.com-0d1117?style=flat-square&logo=gmail&logoColor=F26E26" /></a>
-<a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-Connect-0d1117?style=flat-square&logo=linkedin&logoColor=2dd4bf" /></a>
-<a href="https://github.com/jeevithkumarjt"><img src="https://img.shields.io/badge/GitHub-Profile-0d1117?style=flat-square&logo=github&logoColor=2dd4bf" /></a>
-<img src="https://img.shields.io/badge/Location-Tamil%20Nadu%2C%20India-0d1117?style=flat-square&logo=googlemaps&logoColor=F26E26" />
+<a href="mailto:jeeviaero123@gmail.com"><img src="https://img.shields.io/badge/Email-jeeviaero123%40gmail.com-f6f7fb?style=flat-square&logo=gmail&logoColor=F26E26" /></a>
+<a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b"><img src="https://img.shields.io/badge/LinkedIn-Connect-f6f7fb?style=flat-square&logo=linkedin&logoColor=294199" /></a>
+<a href="https://github.com/jeevithkumarjt"><img src="https://img.shields.io/badge/GitHub-Profile-f6f7fb?style=flat-square&logo=github&logoColor=294199" /></a>
+<img src="https://img.shields.io/badge/Location-Tamil%20Nadu%2C%20India-f6f7fb?style=flat-square&logo=googlemaps&logoColor=F26E26" />
 <img src="https://komarev.com/ghpvc/?username=jeevithkumarjt&style=flat-square&color=f26e26&label=Profile+Views" />
 
 </div>
@@ -26,16 +26,13 @@
 
 ## About Me
 
-I'm a results-driven **Associate Full Stack Web Developer** with 4+ years of professional experience building scalable websites, enterprise platforms, and AI-powered web applications.
+I'm a **Full Stack Web Developer** with 4+ years of professional experience building scalable websites, enterprise platforms, and AI-powered web applications.
 
-I specialize in complete end-to-end development â€” from designing responsive interfaces to backend development, server deployment, production debugging, CRM integration, SEO, and AI integrations.
+I specialize in complete end-to-end development — from designing responsive interfaces to backend development, server deployment, production debugging, CRM integration, SEO, and AI integrations.
 
-```
-I don't just build websites.
-I build complete digital products â€” front end to server, CRM to AI.
-```
+> I don't just build websites. I build complete digital products — front end to server, CRM to AI.
 
-Currently exploring **AI agents, RAG pipelines, and system design** â€” leveling up from full-stack web development into AI-augmented engineering.
+Currently exploring **AI agents, RAG pipelines, and system design** — leveling up from full-stack web development into AI-augmented engineering.
 
 <br/>
 
@@ -158,19 +155,19 @@ Contributed to enterprise-level web applications and digital platforms, includin
 
 </div>
 
-Responsibilities across these platforms: performance optimization Â· WordPress development Â· dynamic & landing pages Â· server configuration & deployment Â· CRM integration (Power Apps / Dynamics 365) Â· API integration Â· AI chatbot integration Â· SEO Â· maintenance Â· debugging Â· security.
+Responsibilities across these platforms: performance optimization, WordPress development, dynamic & landing pages, server configuration & deployment, CRM integration (Power Apps / Dynamics 365), API integration, AI chatbot integration, SEO, maintenance, debugging, and security.
 
 <br/>
 
 ## Work Experience
 
-**Associate Web Developer** â€” Sensiple Software Solution Â· *Mar 2025 â€“ Present*
-- Lead complete website development â€” requirement gathering through deployment
+**Associate Web Developer** — Sensiple Software Solution | *Mar 2025 – Present*
+- Lead complete website development — requirement gathering through deployment
 - Own server setup, deployment, and production debugging
 - Build CRM integrations (Power Apps / Microsoft Dynamics 365) and REST API pipelines
 - Drive performance optimization, SEO, and website maintenance
 
-**Web Developer** â€” DS Enterprises Â· *Dec 2023 â€“ Feb 2025*
+**Web Developer** — DS Enterprises | *Dec 2023 – Feb 2025*
 - Built 20+ responsive HTML websites and 15+ WordPress websites
 - Developed landing pages and dynamic websites with Elementor, WPBakery, JetEngine
 - Delivered performance optimization and UI design work using Photoshop / Illustrator
@@ -214,10 +211,10 @@ I'm open to full-time roles, freelance work, and interesting collaborations.
 
 <br/><br/>
 
-> *"Simplicity is the soul of efficiency."* â€” Austin Freeman
+> "Simplicity is the soul of efficiency." — Austin Freeman
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:f26e26,100:0d1117&height=100&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=100&section=footer" width="100%"/>
 
 </div>

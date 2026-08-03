@@ -1,12 +1,15 @@
 # Dependencies
 node_modules/
 vendor/
+!js/vendor/
+!js/vendor/*.min.js
 
 # Build output
 dist/
 build/
 *.min.js
 *.min.css
+!js/vendor/*.min.css
 
 # Environment
 .env

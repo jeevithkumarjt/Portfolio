@@ -34,13 +34,15 @@
     gsap.ticker.lagSmoothing(0);
   }
 
+  var HEADER_OFFSET = 70;
+
   function scrollToTarget(target) {
     if (lenis) {
-      lenis.scrollTo(target, { duration: 1.2, offset: 0 });
+      lenis.scrollTo(target, { duration: 1.2, offset: -HEADER_OFFSET });
     } else {
       var el = typeof target === 'string' ? $(target) : target;
-      var top = el ? el.getBoundingClientRect().top + window.pageYOffset : 0;
-      window.scrollTo(0, top);
+      var top = el ? el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET : 0;
+      window.scrollTo(0, Math.max(0, top));
     }
   }
 
@@ -123,8 +125,14 @@
       ring.classList.remove('is-hover', 'is-text');
     });
 
-    document.addEventListener('mousedown', function () { ring.classList.add('is-down'); });
-    document.addEventListener('mouseup', function () { ring.classList.remove('is-down'); });
+    document.addEventListener('mousedown', function () {
+      ring.classList.add('is-down');
+      gsap.to(ring, { scale: 0.82, duration: 0.2, ease: 'power2.out' });
+    });
+    document.addEventListener('mouseup', function () {
+      ring.classList.remove('is-down');
+      gsap.to(ring, { scale: 1, duration: 0.3, ease: 'power3.out' });
+    });
   }
 
   /* ---------- Spotlight + parallax on mouse ---------- */
@@ -203,7 +211,7 @@
         var r = btn.getBoundingClientRect();
         var size = Math.max(r.width, r.height) * 1.4;
         var ripple = document.createElement('span');
-        ripple.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,0.4);transform:translate(-50%,-50%) scale(0);width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - r.left) + 'px;top:' + (e.clientY - r.top) + 'px;';
+        ripple.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;background:var(--ripple-color,rgba(255,255,255,0.45));transform:translate(-50%,-50%) scale(0);width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - r.left) + 'px;top:' + (e.clientY - r.top) + 'px;';
         btn.appendChild(ripple);
         gsap.fromTo(ripple, { scale: 0, opacity: 0.7 }, {
           scale: 1, opacity: 0, duration: 0.7, ease: 'power2.out', onComplete: function () {
@@ -260,7 +268,7 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.fillStyle = 'rgba(41,65,153,0.22)';
         ctx.fill();
 
         for (var j = i + 1; j < particles.length; j++) {
@@ -269,11 +277,11 @@
           var dy = p.y - q.y;
           var d2 = dx * dx + dy * dy;
           if (d2 < link * link) {
-            var a = (1 - Math.sqrt(d2) / link) * 0.14;
+            var a = (1 - Math.sqrt(d2) / link) * 0.1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = 'rgba(139,92,246,' + a + ')';
+            ctx.strokeStyle = 'rgba(41,65,153,' + a + ')';
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -541,6 +549,7 @@
       end: 'max',
       onUpdate: function (self) {
         if (backRing) backRing.style.strokeDashoffset = String(backCirc * (1 - self.progress));
+        backTop.classList.toggle('is-visible', self.scroll() > 480);
       }
     });
     backTop.addEventListener('click', function () { scrollToTarget(0); });
