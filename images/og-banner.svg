@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <rect width="1200" height="630" fill="#0d1117"/>
   <rect width="1200" height="6" fill="#f26e26" y="0"/>
   <circle cx="1050" cy="120" r="180" fill="#f26e26" opacity="0.12"/>
   <circle cx="150" cy="520" r="220" fill="#2dd4bf" opacity="0.1"/>
   <text x="70" y="270" font-family="Inter, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Jeevith Kumar R</text>
   <text x="72" y="340" font-family="JetBrains Mono, monospace" font-size="34" fill="#f26e26">Full Stack Web Developer</text>
-  <text x="72" y="400" font-family="Inter, sans-serif" font-size="26" fill="#8b949e">Responsive websites · WordPress · Next.js · CRM &amp; AI integrations · Server deployment</text>
-  <text x="72" y="560" font-family="JetBrains Mono, monospace" font-size="20" fill="#2dd4bf">github.com/jeeviaero123-collab</text>
+  <text x="72" y="400" font-family="Inter, sans-serif" font-size="26" fill="#8b949e">Responsive websites Â· WordPress Â· Next.js Â· CRM &amp; AI integrations Â· Server deployment</text>
+  <text x="72" y="560" font-family="JetBrains Mono, monospace" font-size="20" fill="#2dd4bf">github.com/jeevithkumarjt</text>
 </svg>
