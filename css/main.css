@@ -2339,7 +2339,7 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
 .social-btn .BG {
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: var(--grad);
   z-index: -1;
   border-radius: 9px;
   pointer-events: none;
