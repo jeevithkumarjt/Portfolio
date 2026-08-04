@@ -1337,139 +1337,35 @@ main,
   justify-content: center;
 }
 
-/* Profile card (Uiverse by Smit-Prajapati) — SaaS-style */
+/* Profile card — compact SaaS style */
 .info-card {
   position: relative;
-  width: min(24rem, 100%);
-  border-radius: 20px;
+  width: min(20.5rem, 100%);
+  padding: 1.9rem 1.5rem 1.4rem;
+  border-radius: 18px;
   background: var(--surface);
-  padding: 5px;
-  overflow: hidden;
-  box-shadow: var(--shadow-2);
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.5s var(--ease-out);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+  text-align: center;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
 }
 
 .info-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 26px 64px -22px var(--glow-blue);
-}
-
-.ic-top {
-  position: relative;
-  height: 150px;
-  border-radius: 15px;
-  background: var(--grad);
-  background-size: 200% 200%;
-  animation: ic-grad 8s ease-in-out infinite alternate;
-}
-
-.ic-top .ic-border {
-  position: relative;
-  display: block;
-  height: 30px;
-  width: 130px;
-  background: var(--surface);
-  transform: skew(-40deg);
-  box-shadow: -10px -10px 0 0 var(--surface);
-}
-
-.ic-top .ic-border::before {
-  content: "";
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  top: 0;
-  right: -15px;
-  border-top-left-radius: 10px;
-  box-shadow: -5px -5px 0 2px var(--surface);
-}
-
-.ic-top::before {
-  content: "";
-  position: absolute;
-  top: 30px;
-  left: 0;
-  height: 15px;
-  width: 15px;
-  border-top-left-radius: 15px;
-  box-shadow: -5px -5px 0 2px var(--surface);
-}
-
-.ic-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px;
-  z-index: 2;
-}
-
-.ic-logo {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  color: #fff;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-}
-
-.ic-logo .ic-dot {
-  color: var(--orange);
-}
-
-.ic-social {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ic-social a {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  color: #14204a;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 2px 6px rgba(20, 31, 74, 0.18);
-  transition: color 0.3s var(--ease-out), background 0.3s var(--ease-out),
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s var(--ease-out);
-}
-
-.ic-social a .icon {
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.ic-social a:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.22);
-  transform: translateY(-3px) scale(1.12);
-  box-shadow: 0 10px 22px -8px rgba(20, 31, 74, 0.5);
+  transform: translateY(-4px);
+  border-color: var(--blue-soft);
+  box-shadow: 0 24px 52px -20px var(--glow-blue);
 }
 
 .ic-avatar {
-  position: absolute;
-  left: 50%;
-  bottom: -36px;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 72px;
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto;
   padding: 3px;
   border-radius: 50%;
-  background: var(--surface);
-  box-shadow: var(--shadow-1);
-  z-index: 2;
+  background: var(--grad);
+  box-shadow: 0 10px 24px -10px var(--glow-blue);
 }
 
 .ic-avatar img {
@@ -1477,35 +1373,32 @@ main,
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.ic-bottom {
-  margin-top: 12px;
-  padding: 42px 14px 14px;
-  text-align: center;
+  border: 2px solid var(--surface);
+  background: var(--surface);
 }
 
 .ic-title {
+  margin-top: 0.9rem;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.2px;
   color: var(--text);
 }
 
 .ic-role {
-  margin-top: 0.15rem;
-  font-size: 0.82rem;
+  margin-top: 0.1rem;
+  font-size: 0.8rem;
   color: var(--text-2);
 }
 
 .ic-loc {
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-3);
 }
 
@@ -1522,14 +1415,13 @@ main,
 .ic-row {
   display: flex;
   margin-top: 1rem;
-  padding-top: 0.85rem;
+  padding-top: 0.8rem;
   border-top: 1px solid var(--border);
 }
 
 .ic-item {
   flex: 1;
   text-align: center;
-  padding: 0.1rem;
 }
 
 .ic-item + .ic-item {
@@ -1539,18 +1431,112 @@ main,
 .ic-item b {
   display: block;
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text);
 }
 
 .ic-item span {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: var(--text-3);
+  letter-spacing: 0.02em;
 }
 
-@keyframes ic-grad {
-  0%   { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+/* Isometric social icons (Uiverse by jolprince_5263) */
+.ic-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+
+.iso-pro {
+  position: relative;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.iso-pro a {
+  display: block;
+}
+
+.iso-pro .svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 46px;
+  height: 46px;
+  padding: 12px;
+  border-radius: 50%;
+  color: var(--orange);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.22),
+    inset 0 0 4px rgba(255, 255, 255, 0.35), 0 5px 8px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.iso-pro:hover .svg {
+  transform: translate(5px, -5px);
+}
+
+.iso-pro:hover a > .svg {
+  transform: translate(12px, -12px);
+  color: var(--blue);
+}
+
+.iso-pro span {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.22),
+    inset 0 0 4px rgba(255, 255, 255, 0.35), 0 5px 8px rgba(0, 0, 0, 0.18);
+  transition: all 0.3s;
+}
+
+.iso-pro:hover span {
+  opacity: 1;
+}
+
+.iso-pro:hover span:nth-child(1) {
+  opacity: 0.25;
+}
+
+.iso-pro:hover span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(4px, -4px);
+}
+
+.iso-pro:hover span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(8px, -8px);
+}
+
+.iso-pro .text {
+  opacity: 0;
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  z-index: 5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  white-space: nowrap;
+  pointer-events: none;
+  color: var(--orange);
+  background: var(--glass-bg-strong);
+  transform: translateX(-50%) translateY(2px);
+  transition: all 0.3s;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.12);
+}
+
+.iso-pro:hover .text {
+  opacity: 1;
+  transform: translate(calc(-50% + 18px), -2px) skew(-5deg);
 }
 
 .hero-scroll {
@@ -3034,16 +3020,18 @@ html:not(.js) .skill-bar i {
     transform: translate(8px, -8px) !important;
   }
 
-  .ic-top {
-    animation: none !important;
-  }
-
   .info-card {
     transform: none !important;
-    box-shadow: var(--shadow-2) !important;
+    box-shadow: var(--shadow-1) !important;
   }
 
-  .ic-social a {
+  .iso-pro .svg,
+  .iso-pro span,
+  .iso-pro .text {
+    transform: none !important;
+  }
+
+  .iso-pro:hover .svg {
     transform: none !important;
   }
 }
@@ -3215,8 +3203,8 @@ html:not(.js) .skill-bar i {
   }
 
   .info-card {
-    padding: 5px;
-    width: min(20rem, 100%);
+    width: min(19rem, 100%);
+    padding: 1.7rem 1.2rem 1.3rem;
   }
 
   .hero-cta .btn:not(.btn-icon) {
@@ -3226,10 +3214,6 @@ html:not(.js) .skill-bar i {
 
   .hero-meta {
     justify-content: center;
-  }
-
-  .info-stats {
-    gap: 0.5rem;
   }
 
   .contact-tile {
