@@ -2225,42 +2225,145 @@ main,
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+  gap: 1.4rem;
+  perspective: 1400px;
+}
+
+.skill-wrap {
+  perspective: 1200px;
 }
 
 .skill-card {
   position: relative;
-  padding: 1.7rem;
-  border-radius: var(--r-lg);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
-    border-color 0.35s var(--ease-out);
+  height: 100%;
+  min-height: 19.5rem;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+  box-shadow: rgba(30, 30, 60, 0) 40px 50px 25px -40px,
+    rgba(30, 30, 60, 0.2) 0px 25px 25px -5px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
 }
 
-.skill-card::before {
-  content: "";
+.skill-wrap:hover .skill-card {
+  transform: rotate3d(1, -1, 0, 25deg);
+  box-shadow: rgba(30, 30, 60, 0.3) 30px 50px 25px -40px,
+    rgba(30, 30, 60, 0.15) 0px 25px 30px 0px;
+}
+
+.skill-card .glass {
+  transform-style: preserve-3d;
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: var(--grad);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.35s var(--ease-out);
+  inset: 10px;
+  border-radius: 22px;
+  border-top-left-radius: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+  transform: translate3d(0px, 0px, 30px);
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.6s ease-in-out;
+  pointer-events: none;
 }
 
-.skill-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-1);
+.skill-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.skill-card:hover::before {
-  opacity: 1;
+.skill-logo .circle {
+  display: block;
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  box-shadow: rgba(100, 100, 111, 0.2) 10px 10px 20px 0px;
+  background: rgba(255, 255, 255, 0.14);
+  transition: all 0.6s ease-in-out;
+}
+
+.skill-logo .circle1 {
+  width: 130px;
+  transform: translate3d(0, 0, 25px);
+  top: 8px;
+  left: 8px;
+}
+
+.skill-logo .circle2 {
+  width: 105px;
+  transform: translate3d(0, 0, 45px);
+  top: 10px;
+  left: 10px;
+  transition-delay: 0.3s;
+}
+
+.skill-logo .circle3 {
+  width: 80px;
+  transform: translate3d(0, 0, 65px);
+  top: 12px;
+  left: 12px;
+  transition-delay: 0.6s;
+}
+
+.skill-logo .circle4 {
+  width: 56px;
+  transform: translate3d(0, 0, 85px);
+  top: 15px;
+  left: 15px;
+  transition-delay: 0.9s;
+}
+
+.skill-logo .circle5 {
+  width: 34px;
+  transform: translate3d(0, 0, 105px);
+  top: 18px;
+  left: 18px;
+  display: grid;
+  place-content: center;
+  transition-delay: 1.2s;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.skill-logo .circle5 .icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.skill-wrap:hover .skill-card .circle2 {
+  transform: translate3d(0, 0, 65px);
+}
+
+.skill-wrap:hover .skill-card .circle3 {
+  transform: translate3d(0, 0, 85px);
+}
+
+.skill-wrap:hover .skill-card .circle4 {
+  transform: translate3d(0, 0, 105px);
+}
+
+.skill-wrap:hover .skill-card .circle5 {
+  transform: translate3d(0, 0, 125px);
+}
+
+.skill-content {
+  position: relative;
+  z-index: 3;
+  padding: 6.4rem 1.4rem 1.4rem;
+  transform: translate3d(0, 0, 31px);
+  transform-style: preserve-3d;
 }
 
 .skill-head {
@@ -2269,43 +2372,24 @@ main,
   gap: 0.85rem;
 }
 
-.skill-icon {
-  display: inline-grid;
-  place-items: center;
-  width: 2.7rem;
-  height: 2.7rem;
-  border-radius: 0.8rem;
-  background: var(--orange-soft);
-  color: var(--orange);
-}
-
-.skill-icon .icon {
-  width: 1.2rem;
-  height: 1.2rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .skill-head h3 {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   flex: 1;
+  color: #fff;
 }
 
 .skill-pct {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-3);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .skill-bar {
   margin-top: 1.1rem;
   height: 6px;
   border-radius: var(--r-full);
-  background: var(--surface-3);
+  background: rgba(255, 255, 255, 0.25);
   overflow: hidden;
 }
 
@@ -2313,7 +2397,7 @@ main,
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--grad);
+  background: #fff;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 1.2s var(--ease-out);
@@ -2328,15 +2412,23 @@ main,
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: 1.1rem;
+  transform: translate3d(0, 0, 31px);
+  transition: transform 0.35s ease-in-out 0.1s;
+}
+
+.skill-wrap:hover .skill-card .skill-chips {
+  transform: translate3d(0, 0, 60px);
 }
 
 .skill-chips li {
   padding: 0.32rem 0.7rem;
   border-radius: var(--r-full);
-  background: var(--blue-soft);
-  color: var(--blue);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
   font-size: 0.76rem;
   font-weight: 500;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 
@@ -3069,6 +3161,21 @@ html:not(.js) .skill-bar i {
 
   .iso-pro:hover .svg {
     transform: none !important;
+  }
+
+  .skill-card,
+  .skill-wrap:hover .skill-card {
+    transform: none !important;
+  }
+
+  .skill-card .circle,
+  .skill-wrap:hover .skill-card .circle,
+  .skill-card .glass,
+  .skill-card .skill-content,
+  .skill-card .skill-chips,
+  .skill-wrap:hover .skill-card .skill-chips {
+    transform: none !important;
+    transition-delay: 0s !important;
   }
 }
 
