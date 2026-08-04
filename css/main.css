@@ -487,21 +487,21 @@ main,
 
 .btn-splash {
   --sp-white: #ffffff;
-  --sp-100: #a7c0ff;
-  --sp-200: #7da4ff;
-  --sp-300: #4361ee;
-  --sp-400: #294199;
-  --sp-500: #141f4a;
-  --sp-acc: #f26e26;
-  --sp-radius: 16px;
+  --sp-100: #bfdbfe;
+  --sp-200: #93c5fd;
+  --sp-300: #2563eb;
+  --sp-400: #1d4ed8;
+  --sp-500: #172554;
+  --sp-acc: #93c5fd;
+  --sp-radius: 12px;
 
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: auto;
-  min-width: 238px;
-  height: 68px;
+  min-width: 172px;
+  height: 50px;
   padding: 0;
   border: 0;
   border-radius: var(--sp-radius);
@@ -509,7 +509,7 @@ main,
   background: transparent;
   overflow: visible;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.1px;
   white-space: nowrap;
@@ -608,8 +608,8 @@ main,
   content: "";
   position: absolute;
   inset: 2px;
-  width: 120px;
-  height: 300px;
+  width: 90px;
+  height: 240px;
   margin: auto;
   background: linear-gradient(to right, transparent 0%, #fff 50%, transparent 100%);
   animation: sp-spin 3s linear infinite;
@@ -632,9 +632,9 @@ main,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 10px;
   height: 100%;
-  padding: 0 1.5rem;
+  padding: 0 1.15rem;
   border-radius: calc(var(--sp-radius) * 0.85);
   background: linear-gradient(to bottom, var(--sp-300) 0%, var(--sp-400) 100%);
   box-shadow:
@@ -691,7 +691,7 @@ main,
   position: absolute;
   right: 0;
   transform-origin: center right;
-  width: 14px;
+  width: 10px;
   border-radius: 15px;
   transition: all 0.3s ease;
 }
@@ -699,7 +699,7 @@ main,
 .btn-splash .sp-arrow span {
   position: relative;
   display: block;
-  width: 24px;
+  width: 18px;
   box-shadow: -2px 2px 5px var(--sp-400);
   transform: scale(0.9);
   background: linear-gradient(to bottom, var(--sp-white), var(--sp-100));
@@ -815,7 +815,7 @@ main,
     transform: none;
     min-width: 0;
     width: 100%;
-    max-width: 320px;
+    max-width: 260px;
   }
 }
 
