@@ -2331,9 +2331,9 @@ html[data-theme="dark"] .skill-card {
 }
 
 .skill-wrap:hover .skill-card {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: var(--sk-border-hover);
-  box-shadow: 0 14px 30px -20px var(--sk-glow);
+  box-shadow: 0 8px 18px -12px var(--sk-glow);
 }
 
 .skill-wrap:hover .skill-card::before {
