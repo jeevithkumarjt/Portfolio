@@ -516,16 +516,16 @@ main,
   color: var(--sp-white);
   text-decoration: none;
   cursor: pointer;
-  transform: rotate(353deg) skewX(4deg);
+  transform: none;
   will-change: transform;
 }
 
 .btn-splash:hover {
-  transform: rotate(353deg) skewX(4deg) translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .btn-splash:active {
-  transform: rotate(353deg) skewX(4deg) translate(2px, -2px);
+  transform: translateY(1px) scale(0.98);
 }
 
 .btn-splash:focus-visible {
@@ -2948,7 +2948,7 @@ html:not(.js) .skill-bar i {
   }
 
   .btn-splash:hover {
-    transform: rotate(353deg) skewX(4deg) translateY(-2px) !important;
+    transform: translateY(-2px) !important;
   }
 
   .btn-splash:hover .sp-wrap {

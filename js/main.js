@@ -104,6 +104,11 @@
     // Safety net: never trap the user behind the loader.
     setTimeout(reveal, 3200);
     Promise.all([min, loaded]).then(reveal);
+
+    // bfcache restore: never leave the loader/scroll-lock on screen.
+    window.addEventListener('pageshow', function () {
+      if (!pre.classList.contains('is-done')) reveal();
+    });
   })();
 
 
@@ -126,6 +131,13 @@
         overlay.classList.add('is-active');
         setTimeout(function () { window.location.href = href; }, 320);
       }
+    });
+
+    // Clear the transition overlay on every entry, including bfcache
+    // restore when the previous page's DOM is brought back as-is.
+    window.addEventListener('pageshow', function () {
+      overlay.classList.remove('is-active');
+      document.body.classList.remove('is-locked');
     });
   })();
 
