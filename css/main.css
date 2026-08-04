@@ -2294,19 +2294,78 @@ html[data-theme="dark"] .info-social .btn-icon.brand-github:hover {
   margin-top: 1.4rem;
 }
 
-.footer-social .btn-icon {
-  width: 2.6rem;
-  height: 2.6rem;
+/* Gradient social icon buttons */
+.social-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+  border-radius: 7px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.footer-social .btn-icon .icon {
-  width: 1rem;
-  height: 1rem;
+.social-btn .svgContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(156, 156, 156, 0.466);
+  transition: all 0.3s;
+}
+
+.social-btn .svgContainer .icon {
+  width: 1.1rem;
+  height: 1.1rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+  color: var(--text-2);
+  transition: color 0.3s;
+}
+
+.social-btn .BG {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  z-index: -1;
+  border-radius: 9px;
+  pointer-events: none;
+  transition: transform 0.3s;
+}
+
+.social-btn:hover .BG,
+.social-btn:focus-visible .BG {
+  transform: rotate(35deg);
+  transform-origin: bottom;
+}
+
+.social-btn:hover .svgContainer,
+.social-btn:focus-visible .svgContainer {
+  background-color: rgba(156, 156, 156, 0.466);
+  border-color: transparent;
+}
+
+.social-btn:hover .svgContainer .icon,
+.social-btn:focus-visible .svgContainer .icon {
+  color: #ffffff;
+}
+
+.social-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
 /* Back-to-top FAB (glass pill with ring progress) */
@@ -2519,6 +2578,16 @@ html:not(.js) .skill-bar i {
   .reading-progress i {
     transform: none !important;
     stroke-dashoffset: var(--ring-to, 0) !important;
+  }
+
+  .social-btn .BG {
+    transform: none !important;
+  }
+
+  .social-btn:hover .svgContainer,
+  .social-btn:hover .svgContainer .icon {
+    background-color: rgba(156, 156, 156, 0.466);
+    color: #ffffff;
   }
 }
 
