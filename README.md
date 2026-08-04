@@ -1,9 +1,9 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Full%20Stack%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Associate%20Full%20Stack%20Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b">
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=F26E26&center=true&vCenter=true&width=650&lines=Full+Stack+Developer;AI-Integrated+Web+Systems+%2B+DevOps;Server+Deployment+%26+Production+Debugging;CRM+%2F+API+Integrations+(Dynamics+365);Building+AI+Agents+with+RAG+%2B+LLMs;4%2B+Years+%7C+50%2B+Websites+Shipped+%7C+Team+Lead" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=F26E26&center=true&vCenter=true&width=650&lines=Associate+Full+Stack+Web+Developer;AI-Integrated+Web+Systems+%2B+DevOps;Server+Deployment+%26+Production+Debugging;CRM+%2F+API+Integrations+(Dynamics+365);Building+AI+Agents+with+RAG+%2B+LLMs;4%2B+Years+%7C+50%2B+Websites+Shipped+%7C+Team+Lead" alt="Typing SVG" />
 </a>
 
 <br/>
@@ -28,7 +28,7 @@
 
 ## About Me
 
-I'm a **Full Stack Developer** with 4+ years of professional experience shipping complete digital products end to end — responsive frontends, backend APIs, CRM pipelines, AI features, and the servers that run them.
+I'm an **Associate Full Stack Web Developer** with 4+ years of professional experience shipping complete digital products end to end — responsive frontends, backend APIs, CRM pipelines, AI features, and the servers that run them.
 
 I own the full lifecycle: requirement gathering, development, deployment, production debugging, security, and DevOps. I currently lead a five-person development team and manage six production client properties.
 
@@ -159,7 +159,7 @@ Full stack ownership across enterprise platforms: custom development, server con
 
 ## Work Experience
 
-**Full Stack Developer** — Sensiple Software Solutions | *Mar 2025 – Present*
+**Associate Full Stack Web Developer** — Sensiple Software Solutions | *Mar 2025 – Present*
 - Informal team lead for a 2–3 person (scaling to 5) team — task assignment, output review, delivery ownership
 - Primary client-facing technical contact: requirements, progress, translating business needs into tasks
 - Custom database-driven websites end-to-end with Core PHP, MySQL, and React/Next.js frontends
