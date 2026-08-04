@@ -66,20 +66,20 @@
   --font-display: "Google Sans Text", "Google Sans", Roboto, Arial, sans-serif;
   --font-body: "Nunito", "Comic Sans MS", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
-  --text-2xl: clamp(2.6rem, 6.4vw, 5.2rem);
-  --text-xl: clamp(2rem, 4.4vw, 3.4rem);
-  --text-lg: clamp(1.25rem, 2vw, 1.6rem);
-  --text-base: 1rem;
-  --text-sm: 0.9rem;
-  --text-xs: 0.8rem;
+  --text-2xl: clamp(2rem, 4.6vw, 3.1rem);
+  --text-xl: clamp(1.45rem, 3vw, 2.05rem);
+  --text-lg: clamp(1.05rem, 1.6vw, 1.2rem);
+  --text-base: 0.95rem;
+  --text-sm: 0.84rem;
+  --text-xs: 0.75rem;
 
   /* ---- Spacing scale ---- */
   --space-1: 0.5rem;
   --space-2: 1rem;
-  --space-3: 1.6rem;
-  --space-4: 2.4rem;
-  --space-5: 4rem;
-  --space-6: 6.4rem;
+  --space-3: 1.4rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.2rem;
 
   /* ---- Radius ---- */
   --r-sm: 10px;

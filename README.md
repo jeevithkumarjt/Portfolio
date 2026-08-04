@@ -210,7 +210,7 @@ Full stack ownership across enterprise platforms: custom development, server con
 
 ## Contact
 
-I'm open to full-time roles, freelance work, and interesting collaborations.
+Reach out for anything below — email, WhatsApp or LinkedIn work best.
 
 - **Email:** [jeeviaero123@gmail.com](mailto:jeeviaero123@gmail.com)
 - **WhatsApp:** [+91 91599 77179](https://wa.me/9159977179)
