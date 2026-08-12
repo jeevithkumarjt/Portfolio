@@ -1,9 +1,9 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Associate%20Full%20Stack%20Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:294199,100:f26e26&height=200&section=header&text=Jeevith%20Kumar%20R&fontSize=46&fontColor=ffffff&fontAlignY=38&desc=Web%20Developer&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
 <a href="https://www.linkedin.com/in/jeevithkumar-r-24a78017b">
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=F26E26&center=true&vCenter=true&width=650&lines=Associate+Full+Stack+Web+Developer;AI-Integrated+Web+Systems+%2B+DevOps;Server+Deployment+%26+Production+Debugging;CRM+%2F+API+Integrations+(Dynamics+365);Building+AI+Agents+with+RAG+%2B+LLMs;4%2B+Years+%7C+50%2B+Websites+Shipped+%7C+Team+Lead" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=F26E26&center=true&vCenter=true&width=650&lines=Web+Developer;AI-Integrated+Web+Systems+%2B+DevOps;Server+Deployment+%26+Production+Debugging;CRM+%2F+API+Integrations+(Dynamics+365);Building+AI+Agents+with+RAG+%2B+LLMs;4%2B+Years+%7C+50%2B+Websites+Shipped+%7C+Team+Lead" alt="Typing SVG" />
 </a>
 
 <br/>
@@ -28,7 +28,7 @@
 
 ## About Me
 
-I'm an **Associate Full Stack Web Developer** with 4+ years of professional experience shipping complete digital products end to end — responsive frontends, backend APIs, CRM pipelines, AI features, and the servers that run them.
+I'm a **Web Developer** with 4+ years of professional experience shipping complete digital products end to end — responsive frontends, backend APIs, CRM pipelines, AI features, and the servers that run them.
 
 I own the full lifecycle: requirement gathering, development, deployment, production debugging, security, and DevOps. I currently lead a five-person development team and manage six production client properties.
 
@@ -52,7 +52,7 @@ Currently building **AI agents, RAG pipelines, and LLM integrations** — leveli
 | **Frontend** | HTML5, CSS3, JavaScript, TypeScript, React, Next.js, Tailwind CSS, GSAP |
 | **Backend & APIs** | Core PHP, Node.js, Express, Python, FastAPI, REST APIs, JWT/OAuth |
 | **AI, LLM & Agents** | RAG pipelines, LangChain, ChromaDB, MCP, Ollama, OpenAI / Claude / Gemini |
-| **CMS & eCommerce** | Custom themes & plugins, Elementor Pro, WooCommerce, JetEngine, WPBakery |
+| **Content Platforms & eCommerce** | Custom themes & plugins, visual page building, dynamic content, form architecture, eCommerce |
 | **Databases** | MySQL, MariaDB, SQLite, schema design, query tuning, ChromaDB |
 | **CRM & Integrations** | MS Dynamics 365, Power Apps, Exelare ATS, career-form APIs, webhooks |
 | **Infrastructure & DevOps** | Linux, Nginx, Apache, cPanel/WHM, Google Cloud, Docker, SSL/DNS |
@@ -105,10 +105,10 @@ Currently building **AI agents, RAG pipelines, and LLM integrations** — leveli
 <img src="https://img.shields.io/badge/cPanel/WHM-FF6C2C?style=flat-square&logo=cpanel&logoColor=white" />
 <img src="https://img.shields.io/badge/SSL/DNS-0D1117?style=flat-square&logo=letsencrypt&logoColor=green" />
 
-**CMS & CRM**
+**Content Platforms & CRM**
 
-<img src="https://img.shields.io/badge/WordPress-21759B?style=flat-square&logo=wordpress&logoColor=white" />
-<img src="https://img.shields.io/badge/WooCommerce-96588A?style=flat-square&logo=woocommerce&logoColor=white" />
+<img src="https://img.shields.io/badge/Content_Platforms-F26E26?style=flat-square" />
+<img src="https://img.shields.io/badge/eCommerce-96588A?style=flat-square" />
 <img src="https://img.shields.io/badge/Dynamics_365-0B53CE?style=flat-square&logo=microsoftdynamics365&logoColor=white" />
 <img src="https://img.shields.io/badge/Power_Apps-742774?style=flat-square&logo=powerapps&logoColor=white" />
 
@@ -140,12 +140,12 @@ Six production websites I currently develop, maintain, and operate:
 
 | Project | What I do | Stack |
 |---|---|---|
-| [**Tryvium AI**](https://www.tryvium.ai/) | Monorepo migration strategy, stack selection, hosting, maintainability | Next.js, Turborepo, AI Agents |
-| [**Eprotech AI**](https://www.eprotech.ai/) | Feature development, maintenance, full infrastructure ownership | WordPress, DevOps |
-| [**Sensiple**](https://www.sensiple.com/) | Database-driven corporate platform, SEO, analytics, server management | Core PHP, MySQL, GoAccess |
-| [**Phifix**](https://www.phifix.com/) | Feature development and performance optimization in production | WordPress, Performance |
-| [**CloudSens AI**](https://www.cloudsens.ai/) | End-to-end build and maintenance with cloud infrastructure support | Google Cloud, Full stack |
-| [**Quinovate AI**](https://www.quinovate.ai/) | Custom development, technical SEO, live server ownership | Custom build, SEO, DevOps |
+| [**Tryvium AI**](https://www.tryvium.ai/) | Full-stack development, production support, technical SEO, performance optimization, deployment ownership; leading monorepo migration strategy | Full Stack, AI Agents & RAG, Next.js (migration) |
+| [**Eprotech AI**](https://www.eprotech.ai/) | Feature development, CRM integration, form architecture & validation, infrastructure ownership, deployments | Full Stack, CRM Integration (Dynamics 365), DevOps |
+| [**Sensiple**](https://www.sensiple.com/) | Backend engineering, database architecture, CRM workflow integration, SEO & analytics, server management | Core PHP, MySQL, Node.js, DevOps |
+| [**Phifix**](https://www.phifix.com/) | Feature development, performance optimization, production support | Full Stack, Performance Engineering |
+| [**CloudSens AI**](https://www.cloudsens.ai/) | End-to-end build, cloud infrastructure management, deployments | Google Cloud, Full Stack, DevOps |
+| [**Quinovate AI**](https://www.quinovate.ai/) | Custom development, technical SEO, server ownership, infrastructure management | Full Stack, SEO, DevOps |
 
 </div>
 
@@ -159,28 +159,28 @@ Full stack ownership across enterprise platforms: custom development, server con
 
 ## Work Experience
 
-**Associate Full Stack Web Developer** — Sensiple Software Solutions | *Mar 2025 – Present*
-- Informal team lead for a 2–3 person (scaling to 5) team — task assignment, output review, delivery ownership
-- Primary client-facing technical contact: requirements, progress, translating business needs into tasks
-- Custom database-driven websites end-to-end with Core PHP, MySQL, and React/Next.js frontends
-- CRM integration (Power Apps / MS Dynamics 365) and custom career-form API with full server-side validation
-- Owns the full server and deployment lifecycle — Apache, Nginx, PHP, MySQL, SSL, cPanel/WHM, DNS, Google Cloud
-- Production GoAccess analytics: real-time dashboards, GeoIP tracking, automated daily/monthly reports
-- Building RAG-based AI chatbot capability; exploring Next.js/Turborepo monorepo migration
+**Web Developer** — Sensiple Software Solutions | *Mar 2025 – Present*
+- Lead a five-person development team — task assignment, output review, delivery ownership
+- Serve as the primary client-facing technical contact: requirements, progress, translating business needs into tasks
+- Build custom database-driven websites end-to-end with Core PHP, MySQL, and React/Next.js frontends
+- Integrate CRM platforms (Power Apps / MS Dynamics 365) and a custom career-form API with full server-side validation
+- Own the full server and deployment lifecycle — Apache, Nginx, PHP, MySQL, SSL, cPanel/WHM, DNS, Google Cloud
+- Deliver production GoAccess analytics: real-time dashboards, GeoIP tracking, automated daily/monthly reports
+- Build RAG-based AI chatbot capability; lead exploration of the Next.js/Turborepo monorepo migration
 
-**Full Stack Developer** — DS Enterprises | *Dec 2023 – Feb 2025*
-- Designed, built, and shipped 20+ responsive HTML websites and 15+ custom CMS sites end-to-end
+**Web Developer** — DS Enterprises | *Dec 2023 – Feb 2025*
+- Designed, built, and shipped 20+ responsive HTML websites and 15+ custom content-platform sites end-to-end
 - Built mobile-first, cross-browser-compatible sites with Bootstrap and custom CSS
 - Customized themes and plugins; built dynamic, database-driven pages
-- Owned maintenance, updates, and performance debugging across a portfolio of live client sites
+- Owned maintenance, updates, and performance debugging across a portfolio of 20+ live client sites
 
-**Full Stack Developer — Intern** — DS Enterprises | *Aug 2023 – Nov 2023*
-- Built and maintained websites with HTML, CSS, and a CMS
+**Web Developer — Intern** — DS Enterprises | *Aug 2023 – Nov 2023*
+- Built and maintained websites with HTML, CSS, and content platforms
 - Learned digital marketing fundamentals to support client online presence
 
 **Trainee — Software Testing** — Accord Info Matrix Pvt. Ltd. | *Oct 2022 – Apr 2023*
 - Trained in manual and automation testing fundamentals
-- Foundational QA exposure that informs a detail-oriented debugging approach
+- Apply foundational QA exposure to a detail-oriented debugging approach
 
 **Quality Associate** — Delphi TVS Technologies Limited | *Dec 2020 – Dec 2021*
 - Applied 7QC tools and TQM methodology via SAP
