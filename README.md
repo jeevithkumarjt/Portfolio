@@ -74,6 +74,52 @@ git push
 
 Not captured yet — see the [live site](https://jeevithkumarjt.github.io/Portfolio/).
 
+## What I do
+
+I build and run complete web products, from the client call to the live server —
+requirements, database design, backend APIs, the frontend, deployment, and the
+production debugging afterwards. I also build AI agents and dashboards.
+
+I lead a five-person team, run six production platforms and have shipped 50+ websites.
+
+## Skills
+
+| Area | Skills |
+| --- | --- |
+| **Frontend** | HTML5, CSS3, JavaScript, TypeScript, React, Next.js, Tailwind, Bootstrap |
+| **Backend & APIs** | Python, FastAPI, Core PHP, Node.js, Laravel, REST APIs, async programming, JWT/OAuth, SSE/WebSockets |
+| **AI & Agents** | LLM fundamentals, prompt engineering, RAG, embeddings, vector databases, LLM APIs, function/tool calling, LangChain, LangGraph, agent memory, multi-agent systems, MCP |
+| **Databases** | MySQL, PostgreSQL, SQL, Redis, pgvector |
+| **Cloud & DevOps** | Docker, Git/GitHub, Linux, Nginx, Apache, GCP, CI/CD |
+| **Integrations** | Dynamics 365, Power Apps, Power Automate, Power BI, GA4/GTM |
+| **SEO & Performance** | Technical SEO, Core Web Vitals, Lighthouse, analytics dashboards |
+
+## Live production properties
+
+Six production websites I develop, maintain and operate: Tryvium AI, Eprotech AI,
+Sensiple, Phifix, CloudSens AI and Quinovate AI. What I own on each — features, CRM
+integration, technical SEO, performance, deployments and server operations.
+
+## Selected projects
+
+| Repository | What it is |
+| --- | --- |
+| [ai-agent](https://github.com/jeevithkumarjt/ai-agent) | Self-hosted AI assistant that answers from your own documents and cites its sources — FastAPI, LangGraph, pgvector, JWT, SSE/WebSockets, Docker Compose. |
+| [seo-dashboard](https://github.com/jeevithkumarjt/seo-dashboard) | Internal SEO audit and monitoring dashboard — FastAPI, Playwright, Next.js, TimescaleDB. **In progress.** |
+| **This site** | Hand-written HTML, CSS and JavaScript. No framework, no build step. |
+
+Two more dashboards are in progress — lead and form attribution, and product
+analytics. Both are unfinished, so I am not claiming them yet.
+
+## Contact
+
+- **Email:** [jeeviaero123@gmail.com](mailto:jeeviaero123@gmail.com)
+- **LinkedIn:** [Jeevithkumar R](https://www.linkedin.com/in/jeevithkumar-r-24a78017b)
+- **GitHub:** [jeevithkumarjt](https://github.com/jeevithkumarjt)
+- **WhatsApp:** [+91 91599 77179](https://wa.me/9159977179)
+
+Full work history is in [resume.html](resume.html).
+
 ## Current status
 
 Live and maintained. Sections kept in sync with my GitHub profile README and resume:
