@@ -92,7 +92,6 @@ I lead a five-person team, run six production platforms and have shipped 50+ web
 | **Databases** | MySQL, PostgreSQL, SQL, Redis, pgvector |
 | **Cloud & DevOps** | Docker, Git/GitHub, Linux, Nginx, Apache, GCP, CI/CD |
 | **Integrations** | Dynamics 365, Power Apps, Power Automate, Power BI, GA4/GTM |
-| **SEO & Performance** | Technical SEO, Core Web Vitals, Lighthouse, analytics dashboards |
 
 ## Live production properties
 
@@ -113,10 +112,9 @@ analytics. Both are unfinished, so I am not claiming them yet.
 
 ## Contact
 
+- **Portfolio:** [jeevithkumarjt.github.io/Portfolio](https://jeevithkumarjt.github.io/Portfolio/)
+- **LinkedIn:** [linkedin.com/in/jeevithkumar-r-24a78017b](https://www.linkedin.com/in/jeevithkumar-r-24a78017b)
 - **Email:** [jeeviaero123@gmail.com](mailto:jeeviaero123@gmail.com)
-- **LinkedIn:** [Jeevithkumar R](https://www.linkedin.com/in/jeevithkumar-r-24a78017b)
-- **GitHub:** [jeevithkumarjt](https://github.com/jeevithkumarjt)
-- **WhatsApp:** [+91 91599 77179](https://wa.me/9159977179)
 
 Full work history is in [resume.html](resume.html).
 
