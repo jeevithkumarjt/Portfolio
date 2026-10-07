@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d9488"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#eef0f7"/>
+  <rect x="60" y="40" width="680" height="420" rx="20" fill="#ffffff" stroke="#dde1ee"/>
+  <circle cx="100" cy="72" r="7" fill="#f26e26"/><circle cx="124" cy="72" r="7" fill="#ffc7a1"/><circle cx="148" cy="72" r="7" fill="#a9c0ff"/>
+  <rect x="210" y="59" width="360" height="26" rx="13" fill="#eef0f7"/>
+  <text x="390" y="77" font-family="Arial, sans-serif" font-size="14" fill="#5b6478" text-anchor="middle">https://www.phifix.com/</text>
+  <rect x="90" y="130" width="120" height="18" rx="9" fill="#e6e9f3"/>
+  <rect x="90" y="158" width="420" height="42" rx="10" fill="url(#g)"/>
+  <text x="300" y="185" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">Phifix</text>
+  <rect x="90" y="222" width="380" height="14" rx="7" fill="#dde1ee"/>
+  <rect x="90" y="244" width="340" height="14" rx="7" fill="#e6e9f3"/>
+  <rect x="90" y="266" width="300" height="14" rx="7" fill="#e6e9f3"/>
+  <rect x="560" y="150" width="120" height="120" rx="16" fill="url(#g)" opacity="0.85"/>
+  <rect x="90" y="310" width="200" height="110" rx="14" fill="#f4f6fb" stroke="#e6e9f3"/>
+  <rect x="305" y="310" width="200" height="110" rx="14" fill="#f4f6fb" stroke="#e6e9f3"/>
+  <rect x="520" y="310" width="200" height="110" rx="14" fill="url(#g)" opacity="0.9"/>
+</svg>
