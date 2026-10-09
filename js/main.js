@@ -1,508 +1,315 @@
 /* ============================================================
-   MAIN SCRIPT — Jeevith Kumar R / Portfolio
-   ------------------------------------------------------------
-   Zero dependencies. Vanilla DOM + IntersectionObserver + rAF.
-   Motion system:
-     • preloader → hero reveal sequence
-     • scroll reveals (opacity / translate / scale), once only
-     • counters + SVG ring progress on intersect
-     • floating nav glass transition + scrollspy
-     • reading progress + back-to-top FAB
-     • custom soft cursor (fine pointers, no reduced motion)
-     • magnetic buttons + ripple feedback
-     • floating-label form with inline validation → mailto
-   Every feature degrades gracefully:
-     • prefers-reduced-motion  → static, fully visible
-     • no pointer                 → cursor/magnetic off
-     • no backdrop-filter         → handled in CSS
+   Jeevithkumar R — Portfolio interactions
+   Vanilla JS only. Motion respects prefers-reduced-motion.
    ============================================================ */
-
 (function () {
-  'use strict';
+  "use strict";
 
-  /* ----------------------------------------------------------
-     00. Utilities
-     ---------------------------------------------------------- */
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var finePointer = window.matchMedia('(pointer: fine)').matches;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var revealAll = /[?&]reveal=all/.test(window.location.search);
 
-  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
-
-  function observeOnce(els, onIn) {
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(onIn);
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        onIn(entry.target);
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-    els.forEach(function (el) { io.observe(el); });
+  /* ---------- Hero line reveal on load ---------- */
+  function markLoaded() {
+    document.body.classList.add("is-loaded");
+  }
+  if (revealAll) {
+    // Preview/screenshot mode: render the final state immediately, no transitions
+    document.body.classList.add("preview");
+    markLoaded();
+  } else if (document.readyState === "complete") {
+    markLoaded();
+  } else {
+    window.addEventListener("load", markLoaded);
+    // Fallback so content never stays hidden if load stalls
+    setTimeout(markLoaded, 1200);
   }
 
+  /* ---------- Header border after scroll + progress bar ---------- */
+  var header = document.getElementById("siteHeader");
+  var progressBar = document.getElementById("scrollProgressBar");
+  var ticking = false;
 
-  /* ----------------------------------------------------------
-     01. Theme toggle (persisted, system-aware)
-         Initial attribute is set by a tiny inline script in
-         <head> to avoid a flash of the wrong theme.
-     ---------------------------------------------------------- */
-  (function theme() {
-    var btn = $('#themeToggle');
-    var metaTheme = $('meta[name="theme-color"]');
-    if (!btn) return;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      var y = window.scrollY || window.pageYOffset;
+      if (header) header.classList.toggle("is-scrolled", y > 8);
 
-    function apply(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      if (metaTheme) {
-        metaTheme.setAttribute('content', theme === 'dark' ? '#0a0b10' : '#f6f6f3');
+      if (progressBar) {
+        var doc = document.documentElement;
+        var max = doc.scrollHeight - doc.clientHeight;
+        var pct = max > 0 ? Math.min(y / max, 1) : 0;
+        progressBar.style.transform = "scaleX(" + pct.toFixed(4) + ")";
       }
-      btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-      btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    }
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-    btn.addEventListener('click', function () {
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
-      apply(next);
+  /* ---------- Mobile nav ---------- */
+  var navToggle = document.getElementById("navToggle");
+  var siteNav = document.getElementById("siteNav");
+
+  function closeNav() {
+    if (!navToggle || !siteNav) return;
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open menu");
+    siteNav.classList.remove("is-open");
+  }
+
+  if (navToggle && siteNav) {
+    navToggle.addEventListener("click", function () {
+      var open = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", open ? "false" : "true");
+      navToggle.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+      siteNav.classList.toggle("is-open", !open);
     });
 
-    apply(document.documentElement.getAttribute('data-theme') || 'light');
-  })();
+    siteNav.addEventListener("click", function (e) {
+      if (e.target && e.target.tagName === "A") closeNav();
+    });
 
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNav();
+    });
+  }
 
-  /* ----------------------------------------------------------
-     02. Preloader → hero reveal
-     ---------------------------------------------------------- */
-  (function preloader() {
-    var pre = $('.preloader');
-    var hero = $('.hero');
-    if (!pre) { if (hero) hero.classList.add('is-ready'); return; }
+  /* ---------- Active section highlight in nav ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
+  var sections = navLinks
+    .map(function (link) {
+      var id = link.getAttribute("href");
+      return id && id.charAt(0) === "#" ? document.querySelector(id) : null;
+    })
+    .filter(Boolean);
 
-    function reveal() {
-      pre.classList.add('is-done');
-      document.body.classList.remove('is-locked');
-      if (hero) hero.classList.add('is-ready');
-    }
+  if ("IntersectionObserver" in window && sections.length) {
+    var sectionObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = "#" + entry.target.id;
+          navLinks.forEach(function (link) {
+            var active = link.getAttribute("href") === id;
+            link.classList.toggle("is-active", active);
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach(function (section) { sectionObserver.observe(section); });
+  }
 
+  /* ---------- Reveal on scroll (play once, staggered groups) ---------- */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+
+  function showAllReveals() {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  if (reduceMotion || revealAll || !("IntersectionObserver" in window)) {
+    showAllReveals();
+  } else {
+    // Stagger cards that share a parent grid
+    var staggerParents = document.querySelectorAll(
+      ".about-cards, .project-grid, .skill-groups, .edu-grid, .timeline, .top-skills"
+    );
+    Array.prototype.forEach.call(staggerParents, function (parent) {
+      var kids = parent.querySelectorAll(":scope > .reveal");
+      Array.prototype.forEach.call(kids, function (kid, i) {
+        kid.style.setProperty("--reveal-delay", Math.min(i * 70, 420) + "ms");
+      });
+    });
+
+    var revealObserver = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target); // play once
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* ---------- Animated number counters (run once) ---------- */
+  var counters = Array.prototype.slice.call(document.querySelectorAll(".count"));
+
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
     if (reduceMotion) {
-      pre.classList.add('is-done');
-      if (hero) hero.classList.add('is-ready');
-      document.body.classList.remove('is-locked');
+      el.textContent = target + suffix;
       return;
     }
-
-    document.body.classList.add('is-locked');
-    var min = new Promise(function (r) { setTimeout(r, 750); });
-    var loaded = new Promise(function (r) {
-      if (document.readyState === 'complete') r();
-      else window.addEventListener('load', r, { once: true });
-    });
-    // Safety net: never trap the user behind the loader.
-    setTimeout(reveal, 3200);
-    Promise.all([min, loaded]).then(reveal);
-
-    // bfcache restore: never leave the loader/scroll-lock on screen.
-    window.addEventListener('pageshow', function () {
-      if (!pre.classList.contains('is-done')) reveal();
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     03. Cross-page transition overlay
-         Applied only to same-origin internal pages.
-     ---------------------------------------------------------- */
-  (function pageTransition() {
-    var overlay = $('.page-overlay');
-    if (!overlay || reduceMotion) return;
-
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href]');
-      if (!a) return;
-      var href = a.getAttribute('href');
-      if (!href || href.charAt(0) === '#' || a.target === '_blank') return;
-      if (/^(mailto:|tel:|https?:|javascript:)/i.test(href)) return;
-      if (/\.html(?:#[^#]*)?$/i.test(href)) {
-        e.preventDefault();
-        overlay.classList.add('is-active');
-        setTimeout(function () { window.location.href = href; }, 320);
-      }
-    });
-
-    // Clear the transition overlay on every entry, including bfcache
-    // restore when the previous page's DOM is brought back as-is.
-    window.addEventListener('pageshow', function () {
-      overlay.classList.remove('is-active');
-      document.body.classList.remove('is-locked');
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     04. Soft custom cursor (fine pointer + no reduced motion)
-     ---------------------------------------------------------- */
-  (function cursor() {
-    if (!finePointer || reduceMotion) return;
-    var dot = $('.cursor-dot');
-    var ring = $('.cursor-ring');
-    if (!dot || !ring) return;
-
-    var tx = 0, ty = 0, rx = 0, ry = 0, raf = null;
-
-    function loop() {
-      rx += (tx - rx) * 0.16;
-      ry += (ty - ry) * 0.16;
-      ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
-      raf = requestAnimationFrame(loop);
+    var duration = 1100;
+    var start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) window.requestAnimationFrame(step);
+      else el.textContent = target + suffix;
     }
+    window.requestAnimationFrame(step);
+  }
 
-    window.addEventListener('pointermove', function (e) {
-      tx = e.clientX;
-      ty = e.clientY;
-      dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0)';
-      if (!raf) { loop(); }
-    }, { passive: true });
-
-    document.addEventListener('pointerover', function (e) {
-      var t = e.target.closest('a, button, input, textarea, [data-magnetic], .project, .skill-card, .about-card, .contact-tile');
-      if (!t) return;
-      if (t.matches('input, textarea')) ring.classList.add('is-text');
-      else ring.classList.add('is-hover');
+  if (revealAll) {
+    counters.forEach(function (el) {
+      el.textContent = (parseInt(el.getAttribute("data-count"), 10) || 0) + (el.getAttribute("data-suffix") || "");
     });
-    document.addEventListener('pointerout', function (e) {
-      var t = e.target.closest('a, button, input, textarea, [data-magnetic], .project, .skill-card, .about-card, .contact-tile');
-      if (!t) return;
-      ring.classList.remove('is-hover', 'is-text');
-    });
-    document.addEventListener('pointerdown', function () { ring.classList.add('is-down'); });
-    document.addEventListener('pointerup', function () { ring.classList.remove('is-down'); });
-  })();
-
-
-  /* ----------------------------------------------------------
-     05. Floating nav + burger + anchor handling
-     ---------------------------------------------------------- */
-  (function nav() {
-    var header = $('#siteHeader');
-    var burger = $('#navBurger');
-    var menu = $('#mobileMenu');
-
-    function closeMenu() {
-      if (!burger || !menu) return;
-      burger.classList.remove('is-open');
-      burger.setAttribute('aria-expanded', 'false');
-      menu.classList.remove('is-open');
-    }
-
-    if (burger && menu) {
-      burger.addEventListener('click', function () {
-        var open = !menu.classList.contains('is-open');
-        burger.classList.toggle('is-open', open);
-        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        menu.classList.toggle('is-open', open);
-      });
-    }
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // Close the mobile menu when an anchor is chosen.
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href^="#"]');
-      if (a) closeMenu();
-    });
-
-    // Scroll-driven glass transition for the floating nav.
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        header.classList.toggle('is-scrolled', window.scrollY > 24);
-        ticking = false;
-      });
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-
-  /* ----------------------------------------------------------
-     06. Reading progress + back-to-top FAB
-     ---------------------------------------------------------- */
-  (function progress() {
-    var bar = $('#readingProgress i');
-    var backTop = $('#backTop');
-    var backRing = $('#backTopRing');
-
-    function update() {
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - window.innerHeight;
-      var p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-      if (bar) bar.style.transform = 'scaleX(' + p + ')';
-      if (backTop) backTop.classList.toggle('is-visible', window.scrollY > 480);
-      if (backRing) backRing.style.strokeDashoffset = String(125.6 * (1 - p));
-    }
-
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { update(); ticking = false; });
-    }, { passive: true });
-
-    if (backTop) {
-      backTop.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-      });
-    }
-    update();
-  })();
-
-
-  /* ----------------------------------------------------------
-     07. Scrollspy — active nav state
-     ---------------------------------------------------------- */
-  (function scrollspy() {
-    if (!('IntersectionObserver' in window)) return;
-    var links = $$('[data-nav]');
-    if (!links.length) return;
-    var sections = $$('section[id]');
-
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var id = '#' + entry.target.id;
-        links.forEach(function (link) {
-          var on = link.getAttribute('href') === id;
-          link.classList.toggle('is-active', on);
-          if (on) link.setAttribute('aria-current', 'true');
-          else link.removeAttribute('aria-current');
+  } else if ("IntersectionObserver" in window && counters.length) {
+    var countObserver = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
         });
-      });
-    }, { rootMargin: '-38% 0px -55% 0px' });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach(function (el) { countObserver.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
 
-    sections.forEach(function (s) { spy.observe(s); });
-  })();
+  /* ---------- Skill bars fill once on reveal ---------- */
+  var fills = Array.prototype.slice.call(document.querySelectorAll(".skill-fill"));
 
+  function fillBar(el) {
+    var level = el.getAttribute("data-level") || "0";
+    el.style.width = level + "%";
+  }
 
-  /* ----------------------------------------------------------
-     08. Hero word split (masked line reveal)
-     ---------------------------------------------------------- */
-  (function heroSplit() {
-    var title = $('#heroTitle');
-    if (!title || reduceMotion) return;
-
-    title.querySelectorAll('.line').forEach(function (line) {
-      var gradient = line.hasAttribute('data-gradient')
-        ? line.getAttribute('data-gradient').split(',').map(function (s) { return parseInt(s, 10); })
-        : [];
-      var words = line.textContent.trim().split(/\s+/);
-      line.textContent = '';
-      words.forEach(function (word, i) {
-        var wrap = document.createElement('span');
-        wrap.className = 'word';
-        var inner = document.createElement('span');
-        inner.className = 'wi';
-        inner.textContent = word;
-        if (gradient.indexOf(i) !== -1) inner.classList.add('gradient');
-        wrap.appendChild(inner);
-        wrap.style.setProperty('--d', (0.12 + i * 0.05) + 's');
-        line.appendChild(wrap);
-        if (i < words.length - 1) line.appendChild(document.createTextNode(' '));
-      });
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     09. Scroll reveals — [data-reveal] and [data-reveal-group]
-     ---------------------------------------------------------- */
-  (function reveal() {
-    var singles = $$('[data-reveal]');
-    var groups = $$('[data-reveal-group]');
-
-    observeOnce(singles, function (el) { el.classList.add('is-in'); });
-
-    groups.forEach(function (group) {
-      Array.prototype.forEach.call(group.children, function (child, i) {
-        child.style.setProperty('--d', (i * 0.09) + 's');
-      });
-      observeOnce([group], function (el) { el.classList.add('is-in'); });
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     10. Skill bars — animate once on intersect (via .is-in)
-     ---------------------------------------------------------- */
-  (function skillBars() {
-    observeOnce($$('.skill-card'), function (el) { el.classList.add('is-in'); });
-  })();
-
-
-  /* ----------------------------------------------------------
-     11. Impact rings + counters
-     ---------------------------------------------------------- */
-  (function impact() {
-    // Set each ring's target from data-ring (percent of full circle).
-    $$('.stat-ring .ring-fg').forEach(function (ring) {
-      var pct = parseFloat(ring.getAttribute('data-ring')) || 100;
-      ring.style.setProperty('--ring-to', ((1 - pct / 100) * 326.7).toFixed(2) + 'px');
-    });
-
-    // Animate the .stat cards (reveal + ring transition) once.
-    observeOnce($$('.stat'), function (el) { el.classList.add('is-in'); });
-
-    // Counters — rAF ease-out, run once.
-    function countUp(el) {
-      var target = parseFloat(el.getAttribute('data-count')) || 0;
-      if (reduceMotion) { el.textContent = String(Math.round(target)); return; }
-      el.textContent = '0';
-      var duration = 1600;
-      var start = null;
-      function tick(now) {
-        if (start === null) start = now;
-        var p = Math.min(1, (now - start) / duration);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = String(Math.round(target * eased));
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-    observeOnce($$('[data-count]'), countUp);
-  })();
-
-
-  /* ----------------------------------------------------------
-     12. Timeline line — grows on intersect
-     ---------------------------------------------------------- */
-  (function timeline() {
-    var tl = $('.timeline');
-    if (tl) observeOnce([tl], function (el) { el.classList.add('is-in'); });
-  })();
-
-
-  /* ----------------------------------------------------------
-     13. Marquee — duplicate track for a seamless loop
-     ---------------------------------------------------------- */
-  (function marquee() {
-    var track = $('[data-marquee]');
-    if (track && !reduceMotion) track.innerHTML += track.innerHTML;
-  })();
-
-
-  /* ----------------------------------------------------------
-     14. Magnetic buttons (fine pointers only)
-     ---------------------------------------------------------- */
-  (function magnetic() {
-    if (!finePointer || reduceMotion) return;
-    $$('[data-magnetic]').forEach(function (el) {
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        var mx = (e.clientX - r.left - r.width / 2) * 0.22;
-        var my = (e.clientY - r.top - r.height / 2) * 0.22;
-        el.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
-      });
-      el.addEventListener('pointerleave', function () {
-        el.style.transform = '';
-      });
-    });
-  })();
-
-
-  /* ----------------------------------------------------------
-     15. Button ripple feedback
-     ---------------------------------------------------------- */
-  (function ripple() {
-    if (reduceMotion) return;
-    $$('.btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        var r = btn.getBoundingClientRect();
-        var size = Math.max(r.width, r.height) * 1.6;
-        var rippleEl = document.createElement('span');
-        rippleEl.className = 'ripple';
-        var color = btn.classList.contains('btn-primary')
-          ? 'rgba(255,255,255,0.5)'
-          : 'rgba(41,65,153,0.16)';
-        rippleEl.style.cssText =
-          'width:' + size + 'px;height:' + size + 'px;' +
-          'left:' + (e.clientX - r.left) + 'px;top:' + (e.clientY - r.top) + 'px;' +
-          '--ripple-color:' + color + ';' +
-          'transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s;';
-        btn.appendChild(rippleEl);
-        requestAnimationFrame(function () {
-          rippleEl.style.transform = 'translate(-50%,-50%) scale(1)';
-          rippleEl.style.opacity = '0';
+  if (revealAll) {
+    fills.forEach(fillBar);
+  } else if ("IntersectionObserver" in window && fills.length) {
+    var barObserver = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            fillBar(entry.target);
+            obs.unobserve(entry.target);
+          }
         });
-        setTimeout(function () {
-          if (rippleEl.parentNode) rippleEl.parentNode.removeChild(rippleEl);
-        }, 750);
+      },
+      { threshold: 0.4 }
+    );
+    fills.forEach(function (el) { barObserver.observe(el); });
+  } else {
+    fills.forEach(fillBar);
+  }
+
+  /* ---------- Project filter tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".filter-tab"));
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var filter = tab.getAttribute("data-filter") || "all";
+
+      tabs.forEach(function (t) {
+        var active = t === tab;
+        t.classList.toggle("is-active", active);
+        t.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      cards.forEach(function (card) {
+        var category = card.getAttribute("data-category");
+        var show = filter === "all" || category === filter;
+        card.hidden = !show;
+        if (show) card.classList.add("is-visible");
       });
     });
-  })();
+  });
 
-
-  /* ----------------------------------------------------------
-     16. Contact form — floating labels (CSS) + validation → mailto
-     ---------------------------------------------------------- */
-  (function contact() {
-    var form = $('#contactForm');
-    if (!form) return;
-
-    var nameField = $('#cf-name');
-    var emailField = $('#cf-email');
-    var msgField = $('#cf-msg');
-    var status = $('.form-status');
-    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    function validateField(field) {
-      var value = field.value.trim();
-      var ok = field === emailField ? emailRe.test(value) : value.length > 0;
-      var group = field.closest('.field');
-      if (!group) return ok;
-      group.classList.toggle('is-error', !ok && value.length > 0);
-      group.classList.toggle('is-valid', ok && value.length > 0);
-      return ok;
-    }
-
-    [nameField, emailField, msgField].forEach(function (field) {
-      field.addEventListener('input', function () { validateField(field); });
-      field.addEventListener('blur', function () { validateField(field); });
+  /* ---------- Magnetic effect — main CTA only ---------- */
+  var magnetic = document.getElementById("magneticCta");
+  if (magnetic && finePointer && !reduceMotion) {
+    var strength = 0.28;
+    magnetic.addEventListener("mousemove", function (e) {
+      var rect = magnetic.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      magnetic.style.transform =
+        "translate(" + (x * strength).toFixed(1) + "px," + (y * strength).toFixed(1) + "px)";
     });
+    magnetic.addEventListener("mouseleave", function () {
+      magnetic.style.transform = "translate(0,0)";
+    });
+  }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var valid = [nameField, emailField, msgField].map(validateField).indexOf(false) === -1;
-      if (!valid) {
-        status.textContent = 'Please complete every field correctly.';
-        status.classList.add('is-error');
-        var firstBad = form.querySelector('.field.is-error input, .field.is-error textarea');
-        if (firstBad) firstBad.focus();
-        return;
+  /* ---------- Custom cursor (desktop, pointer: fine only) ---------- */
+  var dot = document.querySelector(".cursor-dot");
+  var ring = document.querySelector(".cursor-ring");
+
+  if (dot && ring && finePointer && !reduceMotion && !revealAll) {
+    document.body.classList.add("has-cursor");
+
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var ringX = mouseX;
+    var ringY = mouseY;
+    var visible = false;
+
+    document.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!visible) {
+        visible = true;
+        dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
+        ringX = mouseX;
+        ringY = mouseY;
       }
-
-      status.classList.remove('is-error');
-      status.textContent = 'Preparing your email client\u2026';
-      setTimeout(function () {
-        var subject = encodeURIComponent('Project inquiry from ' + nameField.value.trim());
-        var body = encodeURIComponent(
-          msgField.value.trim() + '\n\n\u2014 ' + nameField.value.trim() + ' (' + emailField.value.trim() + ')'
-        );
-        window.location.href = 'mailto:jeeviaero123@gmail.com?subject=' + subject + '&body=' + body;
-      }, 700);
     });
-  })();
 
+    document.addEventListener("mouseleave", function () {
+      dot.style.opacity = "0";
+      ring.style.opacity = "0";
+    });
+    document.addEventListener("mouseenter", function () {
+      dot.style.opacity = "1";
+      ring.style.opacity = "1";
+    });
 
-  /* ----------------------------------------------------------
-     17. Footer year
-     ---------------------------------------------------------- */
-  var year = $('#year');
-  if (year) year.textContent = String(new Date().getFullYear());
+    // Grow the ring over links, buttons and cards
+    var hoverTargets = document.querySelectorAll("a, button, summary, .card, .stack-tile");
+    Array.prototype.forEach.call(hoverTargets, function (el) {
+      el.addEventListener("mouseenter", function () { ring.classList.add("is-hover"); });
+      el.addEventListener("mouseleave", function () { ring.classList.remove("is-hover"); });
+    });
+
+    (function loop() {
+      // Dot follows exactly, ring eases behind (slight lerp)
+      dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
+      ringX += (mouseX - ringX) * 0.16;
+      ringY += (mouseY - ringY) * 0.16;
+      ring.style.transform = "translate(" + ringX.toFixed(2) + "px," + ringY.toFixed(2) + "px)";
+      window.requestAnimationFrame(loop);
+    })();
+  }
+
+  /* ---------- Back to top ---------- */
+  var backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      var logo = document.querySelector(".logo");
+      if (logo) logo.focus({ preventScroll: true });
+    });
+  }
 })();
