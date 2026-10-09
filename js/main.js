@@ -237,6 +237,187 @@
     });
   });
 
+  /* ---------- Skill system map: layer panels ---------- */
+  var layerBtns = Array.prototype.slice.call(document.querySelectorAll(".sys-layer"));
+  var layerPanels = Array.prototype.slice.call(document.querySelectorAll("[data-layer-panel]"));
+
+  function activateLayer(name, focusPanel) {
+    layerBtns.forEach(function (btn) {
+      var active = btn.getAttribute("data-layer") === name;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-expanded", active ? "true" : "false");
+    });
+    layerPanels.forEach(function (panel) {
+      var show = panel.getAttribute("data-layer-panel") === name;
+      if (show) {
+        panel.removeAttribute("hidden");
+        if (focusPanel) panel.setAttribute("tabindex", "-1");
+      } else {
+        panel.setAttribute("hidden", "");
+      }
+    });
+  }
+
+  if (layerBtns.length && layerPanels.length) {
+    // No-JS shows every panel; with JS, start on the first layer only
+    activateLayer(layerBtns[0].getAttribute("data-layer"), false);
+    layerBtns.forEach(function (btn) {
+      var name = btn.getAttribute("data-layer");
+      btn.addEventListener("click", function () { activateLayer(name, false); });
+      btn.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          activateLayer(name, false);
+        }
+      });
+    });
+  }
+
+  /* ---------- Skill search: filter skills, highlight proof ---------- */
+  var skillInput = document.getElementById("skillSearch");
+  var skillClear = document.getElementById("skillClear");
+  var skillStatus = document.getElementById("skillStatus");
+  var skillItems = Array.prototype.slice.call(document.querySelectorAll("[data-skill]"));
+  var proofEls = Array.prototype.slice.call(document.querySelectorAll("[data-skills]"));
+
+  function norm(s) {
+    return (s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function clearSkillSearch() {
+    skillItems.forEach(function (li) { li.removeAttribute("hidden"); });
+    layerPanels.forEach(function (panel) { panel.removeAttribute("hidden"); });
+    if (layerBtns.length) activateLayer(layerBtns[0].getAttribute("data-layer"), false);
+    proofEls.forEach(function (el) {
+      el.classList.remove("is-hit");
+      el.classList.remove("is-dim");
+    });
+    if (skillClear) skillClear.setAttribute("hidden", "");
+    if (skillStatus) skillStatus.textContent = "";
+  }
+
+  function runSkillSearch() {
+    if (!skillInput) return;
+    var q = norm(skillInput.value.trim());
+    if (!q) {
+      clearSkillSearch();
+      return;
+    }
+    if (skillClear) skillClear.removeAttribute("hidden");
+
+    // 1) Filter skill rows by name substring; show only panels with matches
+    var visibleCount = 0;
+    var panelsWithHits = {};
+    skillItems.forEach(function (li) {
+      var nameEl = li.querySelector(".sk-name");
+      var match = norm(nameEl ? nameEl.textContent : "").indexOf(q) !== -1;
+      if (match) {
+        li.removeAttribute("hidden");
+        visibleCount++;
+        var panel = li.closest("[data-layer-panel]");
+        if (panel) panelsWithHits[panel.getAttribute("data-layer-panel")] = true;
+      } else {
+        li.setAttribute("hidden", "");
+      }
+    });
+    layerPanels.forEach(function (panel) {
+      if (panelsWithHits[panel.getAttribute("data-layer-panel")]) {
+        panel.removeAttribute("hidden");
+      } else {
+        panel.setAttribute("hidden", "");
+      }
+    });
+
+    // 2) Exact skill chosen -> highlight proof (projects + experience)
+    var exactKeys = [];
+    skillItems.forEach(function (li) {
+      var nameEl = li.querySelector(".sk-name");
+      if (norm(nameEl ? nameEl.textContent : "") === q) {
+        (li.getAttribute("data-skill") || "").split(/\s+/).forEach(function (k) {
+          if (k && exactKeys.indexOf(k) === -1) exactKeys.push(k);
+        });
+      }
+    });
+
+    var hits = 0;
+    if (exactKeys.length) {
+      proofEls.forEach(function (el) {
+        var tokens = (el.getAttribute("data-skills") || "").split(/\s+/);
+        var match = exactKeys.some(function (k) { return tokens.indexOf(k) !== -1; });
+        el.classList.toggle("is-hit", match);
+        el.classList.toggle("is-dim", !match);
+        if (match) hits++;
+      });
+    } else {
+      proofEls.forEach(function (el) {
+        el.classList.remove("is-hit");
+        el.classList.remove("is-dim");
+      });
+    }
+
+    if (skillStatus) {
+      skillStatus.textContent = exactKeys.length
+        ? visibleCount + " skill" + (visibleCount === 1 ? "" : "s") + " · " + hits + " place" + (hits === 1 ? "" : "s") + " highlighted below"
+        : visibleCount + " skill" + (visibleCount === 1 ? "" : "s") + " found — pick one to highlight where it is used";
+    }
+  }
+
+  if (skillInput) {
+    skillInput.addEventListener("input", runSkillSearch);
+    skillInput.addEventListener("change", runSkillSearch);
+  }
+  if (skillClear) {
+    skillClear.addEventListener("click", function () {
+      if (skillInput) skillInput.value = "";
+      clearSkillSearch();
+      if (skillInput) skillInput.focus();
+    });
+  }
+
+  /* ---------- Lightbox: click to enlarge, Esc to close ---------- */
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightboxImg");
+  var lightboxCap = document.getElementById("lightboxCap");
+  var lightboxClose = document.getElementById("lightboxClose");
+  var lastFocus = null;
+
+  function openLightbox(src, caption, alt) {
+    if (!lightbox || !lightboxImg) return;
+    lastFocus = document.activeElement;
+    lightboxImg.setAttribute("src", src);
+    lightboxImg.setAttribute("alt", alt || caption || "Enlarged project image");
+    if (lightboxCap) lightboxCap.textContent = caption || "";
+    lightbox.removeAttribute("hidden");
+    document.body.style.overflow = "hidden";
+    if (lightboxClose) lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hasAttribute("hidden")) return;
+    lightbox.setAttribute("hidden", "");
+    document.body.style.overflow = "";
+    if (lightboxImg) lightboxImg.removeAttribute("src");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".media-btn"), function (btn) {
+    btn.addEventListener("click", function () {
+      var img = btn.querySelector("img");
+      openLightbox(
+        btn.getAttribute("data-full"),
+        btn.getAttribute("data-caption"),
+        img ? img.getAttribute("alt") : ""
+      );
+    });
+  });
+  if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-lightbox-close]"), function (el) {
+    el.addEventListener("click", closeLightbox);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeLightbox();
+  });
+
   /* ---------- Magnetic effect — main CTA only ---------- */
   var magnetic = document.getElementById("magneticCta");
   if (magnetic && finePointer && !reduceMotion) {
@@ -287,7 +468,7 @@
     });
 
     // Grow the ring over links, buttons and cards
-    var hoverTargets = document.querySelectorAll("a, button, summary, .card, .stack-tile");
+    var hoverTargets = document.querySelectorAll("a, button, summary, .card, .stack-tile, .sys-layer, .media-btn");
     Array.prototype.forEach.call(hoverTargets, function (el) {
       el.addEventListener("mouseenter", function () { ring.classList.add("is-hover"); });
       el.addEventListener("mouseleave", function () { ring.classList.remove("is-hover"); });

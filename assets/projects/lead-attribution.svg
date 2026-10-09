@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="leadT leadD">
+  <title id="leadT">Lead Attribution and Form Dashboard architecture diagram</title>
+  <desc id="leadD">Website forms capture UTM and session data, Power Automate sends it to Dataverse, and Power BI plus GA4 and GTM report sources and conversions.</desc>
+  <rect x="0" y="0" width="1600" height="900" fill="#17171A"/>
+  <rect x="40" y="40" width="1520" height="820" fill="none" stroke="#2A2A30" stroke-width="3"/>
+  <rect x="80" y="90" width="90" height="8" fill="#E8590C"/>
+  <text x="80" y="170" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="800" fill="#EDEDEF">Lead Attribution + Form Dashboard</text>
+  <text x="80" y="215" font-family="ui-monospace, Consolas, monospace" font-size="26" fill="#A0A0A8">Architecture diagram — first click to CRM lead</text>
+
+  <g font-family="ui-monospace, Consolas, monospace" font-size="27" fill="#EDEDEF" text-anchor="middle">
+    <rect x="80" y="320" width="330" height="130" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="245" y="375">Website forms</text><text x="245" y="410" font-size="21" fill="#A0A0A8">UTM + session capture</text>
+    <rect x="480" y="320" width="330" height="130" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="645" y="375">Power Automate</text><text x="645" y="410" font-size="21" fill="#A0A0A8">flow on every submit</text>
+    <rect x="880" y="320" width="300" height="130" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="1030" y="375">Dataverse</text><text x="1030" y="410" font-size="21" fill="#A0A0A8">lead store</text>
+    <rect x="80" y="540" width="720" height="120" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="440" y="595">Power BI report</text><text x="440" y="630" font-size="21" fill="#A0A0A8">sources + conversions</text>
+    <rect x="870" y="540" width="650" height="120" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="1195" y="595">GA4 / GTM</text><text x="1195" y="630" font-size="21" fill="#A0A0A8">traffic-side measurement</text>
+  </g>
+  <g stroke="#3A3A42" stroke-width="3" fill="none">
+    <line x1="410" y1="385" x2="476" y2="385"/><polygon points="476,375 492,385 476,395" fill="#3A3A42" stroke="none"/>
+    <line x1="810" y1="385" x2="876" y2="385"/><polygon points="876,375 892,385 876,395" fill="#3A3A42" stroke="none"/>
+    <line x1="1030" y1="450" x2="1030" y2="500"/><polygon points="1020,500 1030,516 1040,500" fill="#3A3A42" stroke="none"/>
+    <line x1="1030" y1="450" x2="1195" y2="536"/><polygon points="1185,528 1200,540 1184,544" fill="#3A3A42" stroke="none"/>
+    <line x1="800" y1="600" x2="866" y2="600"/><polygon points="866,590 882,600 866,610" fill="#3A3A42" stroke="none"/>
+  </g>
+  <text x="80" y="740" font-family="ui-monospace, Consolas, monospace" font-size="24" fill="#A0A0A8">Every form carries its origin with it, so budget decisions stop being guesswork.</text>
+</svg>

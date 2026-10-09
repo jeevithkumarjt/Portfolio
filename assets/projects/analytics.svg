@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="anT anD">
+  <title id="anT">Product Analytics Dashboard architecture diagram</title>
+  <desc id="anD">A self-hosted event SDK sends events to a FastAPI collector backed by TimescaleDB, and a Next.js UI shows funnels. Work in progress.</desc>
+  <rect x="0" y="0" width="1600" height="900" fill="#17171A"/>
+  <rect x="40" y="40" width="1520" height="820" fill="none" stroke="#2A2A30" stroke-width="3"/>
+  <rect x="80" y="90" width="90" height="8" fill="#E8590C"/>
+  <text x="80" y="170" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="800" fill="#EDEDEF">Product Analytics Dashboard</text>
+  <text x="80" y="215" font-family="ui-monospace, Consolas, monospace" font-size="26" fill="#A0A0A8">Architecture diagram — self-hosted events and funnels (in progress)</text>
+
+  <g font-family="ui-monospace, Consolas, monospace" font-size="27" fill="#EDEDEF" text-anchor="middle">
+    <rect x="80" y="320" width="300" height="130" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="230" y="375">Event SDK</text><text x="230" y="410" font-size="21" fill="#A0A0A8">page + click events</text>
+    <rect x="450" y="320" width="330" height="130" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="615" y="375">FastAPI collector</text><text x="615" y="410" font-size="21" fill="#A0A0A8">validate + store</text>
+    <rect x="850" y="320" width="300" height="130" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="1000" y="375">TimescaleDB</text><text x="1000" y="410" font-size="21" fill="#A0A0A8">time-series events</text>
+    <rect x="80" y="540" width="1070" height="120" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="615" y="595">Next.js funnels UI</text><text x="615" y="630" font-size="21" fill="#A0A0A8">signup, activation, retention — no third-party tracker</text>
+  </g>
+  <g stroke="#3A3A42" stroke-width="3" fill="none">
+    <line x1="380" y1="385" x2="446" y2="385"/><polygon points="446,375 462,385 446,395" fill="#3A3A42" stroke="none"/>
+    <line x1="780" y1="385" x2="846" y2="385"/><polygon points="846,375 862,385 846,395" fill="#3A3A42" stroke="none"/>
+    <line x1="1000" y1="450" x2="1000" y2="536"/><polygon points="990,536 1000,552 1010,536" fill="#3A3A42" stroke="none"/>
+  </g>
+  <text x="80" y="740" font-family="ui-monospace, Consolas, monospace" font-size="24" fill="#A0A0A8">Funnel numbers without sending every event to a third-party service.</text>
+</svg>

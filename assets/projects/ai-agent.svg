@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="aiT aiD">
+  <title id="aiT">Enterprise AI Agent Platform architecture diagram</title>
+  <desc id="aiD">Flow from visitor browser through FastAPI to a LangGraph supervisor routing to knowledge, support and sales specialists backed by pgvector RAG, with JWT login, streaming, audit log, Ollama embeddings and Docker Compose.</desc>
+  <rect x="0" y="0" width="1600" height="900" fill="#17171A"/>
+  <rect x="40" y="40" width="1520" height="820" fill="none" stroke="#2A2A30" stroke-width="3"/>
+  <rect x="80" y="90" width="90" height="8" fill="#E8590C"/>
+  <text x="80" y="170" font-family="Inter, system-ui, sans-serif" font-size="52" font-weight="800" fill="#EDEDEF">Enterprise AI Agent Platform</text>
+  <text x="80" y="215" font-family="ui-monospace, Consolas, monospace" font-size="26" fill="#A0A0A8">Architecture diagram — FastAPI + LangGraph + pgvector RAG</text>
+
+  <g font-family="ui-monospace, Consolas, monospace" font-size="27" fill="#EDEDEF" text-anchor="middle">
+    <rect x="80" y="300" width="250" height="120" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="205" y="350">Visitor</text><text x="205" y="385">browser</text>
+    <rect x="400" y="300" width="250" height="120" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="525" y="350">FastAPI</text><text x="525" y="385">service</text>
+    <rect x="720" y="300" width="290" height="120" rx="8" fill="#1C1C20" stroke="#E8590C" stroke-width="3"/>
+    <text x="865" y="350">LangGraph</text><text x="865" y="385">supervisor</text>
+    <rect x="1080" y="260" width="280" height="200" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="1220" y="315">Knowledge</text><text x="1220" y="360">Support</text><text x="1220" y="405">Sales</text>
+    <text x="1220" y="440" font-size="21" fill="#A0A0A8">specialists</text>
+    <rect x="400" y="520" width="350" height="120" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="575" y="570">pgvector RAG</text><text x="575" y="605" font-size="21" fill="#A0A0A8">docs + site crawl</text>
+    <rect x="810" y="520" width="270" height="120" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/>
+    <text x="945" y="570">Ollama</text><text x="945" y="605" font-size="21" fill="#A0A0A8">embeddings</text>
+  </g>
+  <g stroke="#3A3A42" stroke-width="3" fill="none">
+    <line x1="330" y1="360" x2="396" y2="360"/><polygon points="396,350 412,360 396,370" fill="#3A3A42" stroke="none"/>
+    <line x1="650" y1="360" x2="716" y2="360"/><polygon points="716,350 732,360 716,370" fill="#3A3A42" stroke="none"/>
+    <line x1="1010" y1="360" x2="1076" y2="360"/><polygon points="1076,350 1092,360 1076,370" fill="#3A3A42" stroke="none"/>
+    <line x1="865" y1="420" x2="865" y2="516"/><polygon points="855,516 865,532 875,516" fill="#3A3A42" stroke="none"/>
+    <line x1="750" y1="580" x2="806" y2="580"/><polygon points="806,570 822,580 806,590" fill="#3A3A42" stroke="none"/>
+  </g>
+  <g font-family="ui-monospace, Consolas, monospace" font-size="24" fill="#A0A0A8" text-anchor="middle">
+    <rect x="80" y="720" width="280" height="70" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/><text x="220" y="764">JWT login</text>
+    <rect x="375" y="720" width="280" height="70" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/><text x="515" y="764">SSE + WebSocket</text>
+    <rect x="670" y="720" width="280" height="70" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/><text x="810" y="764">Admin portal</text>
+    <rect x="965" y="720" width="280" height="70" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/><text x="1105" y="764">Tool-call audit log</text>
+    <rect x="1260" y="720" width="260" height="70" rx="8" fill="#1C1C20" stroke="#2A2A30" stroke-width="2"/><text x="1390" y="764">Docker Compose</text>
+  </g>
+</svg>
