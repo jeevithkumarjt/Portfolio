@@ -1075,7 +1075,11 @@ body.preview .reveal {
 .lvl-know { color: var(--text-muted); border-color: var(--border); }
 
 /* ---------- System map diagram ---------- */
-.sysmap { width: 100%; height: auto; margin-top: 28px; }
+.sysmap-scroll { overflow-x: auto; }
+.sysmap { width: 100%; height: auto; margin-top: 28px; display: block; }
+@media (max-width: 699px) {
+  .sysmap { min-width: 620px; }
+}
 .sys-layer { cursor: pointer; }
 .sys-layer rect {
   fill: var(--surface);
@@ -1087,25 +1091,34 @@ body.preview .reveal {
 .sys-layer.is-active rect { stroke: var(--accent); stroke-width: 2; }
 .sys-layer:focus { outline: none; }
 .sys-layer:focus-visible rect { stroke: var(--focus); stroke-width: 2.5; }
-.sys-index { font-family: var(--font-mono); font-size: 22px; fill: var(--accent); }
-.sys-name { font-family: var(--font-sans); font-size: 29px; font-weight: 700; fill: var(--text); }
-.sys-count { font-family: var(--font-mono); font-size: 19px; fill: var(--text-muted); }
+.sys-index { font-family: var(--font-mono); font-size: 20px; fill: var(--accent); }
+.sys-name { font-family: var(--font-sans); font-size: 19px; font-weight: 700; fill: var(--text); }
+.sys-count { font-family: var(--font-mono); font-size: 16px; fill: var(--text-muted); }
 .sys-arrow line { stroke: var(--border-strong); stroke-width: 2; }
 .sys-arrow polygon { fill: var(--border-strong); }
 
 /* ---------- Layer panels ---------- */
 .layer-panels { display: grid; gap: 16px; margin-top: 20px; }
 .layer-panel[hidden] { display: none; }
-.layer-skills { display: grid; gap: 0; margin-top: 8px; }
-.layer-skills li {
-  border-top: 1px solid var(--border);
-  padding: 12px 0;
+.layer-tiles {
   display: grid;
-  gap: 4px;
-  justify-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
 }
-.layer-skills li:first-child { border-top: 0; }
-.layer-skills li[hidden] { display: none; }
+.layer-tiles li[hidden] { display: none; }
+.tile {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  transition: transform 160ms var(--ease), border-color 160ms var(--ease);
+}
+.tile:hover,
+.tile.is-near { border-color: var(--accent); }
 .sk-name { font-weight: 600; }
 .sk-used { font-size: 0.88rem; color: var(--text-muted); }
 .sk-used a { color: var(--text); border-bottom: 1px solid var(--border-strong); }

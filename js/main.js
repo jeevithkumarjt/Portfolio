@@ -374,6 +374,41 @@
     });
   }
 
+  /* ---------- Tiles: pointer-follow highlight (transform only, flat) ---------- */
+  var tileWrap = document.querySelector(".layer-panels");
+  if (tileWrap && finePointer && !reduceMotion) {
+    var tileRaf = null;
+    tileWrap.addEventListener("mousemove", function (e) {
+      if (tileRaf) return;
+      tileRaf = window.requestAnimationFrame(function () {
+        tileRaf = null;
+        var tiles = tileWrap.querySelectorAll(".tile");
+        Array.prototype.forEach.call(tiles, function (t) {
+          if (t.offsetParent === null) return;
+          var r = t.getBoundingClientRect();
+          var dx = e.clientX - (r.left + r.width / 2);
+          var dy = e.clientY - (r.top + r.height / 2);
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 150 && d > 1) {
+            var pull = (1 - d / 150) * 4;
+            t.style.transform =
+              "translate(" + ((dx / d) * pull).toFixed(1) + "px," + ((dy / d) * pull).toFixed(1) + "px)";
+            t.classList.toggle("is-near", d < 100);
+          } else {
+            t.style.transform = "";
+            t.classList.toggle("is-near", d <= 1);
+          }
+        });
+      });
+    });
+    tileWrap.addEventListener("mouseleave", function () {
+      Array.prototype.forEach.call(tileWrap.querySelectorAll(".tile"), function (t) {
+        t.style.transform = "";
+        t.classList.remove("is-near");
+      });
+    });
+  }
+
   /* ---------- Lightbox: click to enlarge, Esc to close ---------- */
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightboxImg");
