@@ -453,70 +453,158 @@
     if (e.key === "Escape") closeLightbox();
   });
 
-  /* ---------- Magnetic effect — main CTA only ---------- */
-  var magnetic = document.getElementById("magneticCta");
-  if (magnetic && finePointer && !reduceMotion) {
-    var strength = 0.28;
-    magnetic.addEventListener("mousemove", function (e) {
-      var rect = magnetic.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-      magnetic.style.transform =
-        "translate(" + (x * strength).toFixed(1) + "px," + (y * strength).toFixed(1) + "px)";
-    });
-    magnetic.addEventListener("mouseleave", function () {
-      magnetic.style.transform = "translate(0,0)";
-    });
-  }
+  /* ---------- Blueprint reticle cursor (fine pointer + hover only) ---------- */
+  var hoverAble = window.matchMedia("(hover: hover)").matches;
+  var reticle = document.querySelector(".reticle");
 
-  /* ---------- Custom cursor (desktop, pointer: fine only) ---------- */
-  var dot = document.querySelector(".cursor-dot");
-  var ring = document.querySelector(".cursor-ring");
+  if (reticle && finePointer && hoverAble && !revealAll) {
+    document.body.classList.add("has-reticle");
+    var rDot = reticle.querySelector(".reticle-dot");
+    var rBox = reticle.querySelector(".reticle-box");
+    var rLabel = reticle.querySelector(".reticle-label");
 
-  if (dot && ring && finePointer && !reduceMotion && !revealAll) {
-    document.body.classList.add("has-cursor");
+    var px = -100, py = -100;
+    var bx = 0, by = 0, bw = 28, bh = 28;
+    var tx = 0, ty = 0, tw = 28, th = 28;
+    var boxOn = false, pressed = false, inWin = false;
+    var magEl = null;
+    if (rDot) rDot.style.transform = "translate(-100px,-100px)";
 
-    var mouseX = window.innerWidth / 2;
-    var mouseY = window.innerHeight / 2;
-    var ringX = mouseX;
-    var ringY = mouseY;
-    var visible = false;
+    var TEXT_TAGS = { P: 1, H1: 1, H2: 1, H3: 1, H4: 1, LI: 1, DD: 1, DT: 1, BLOCKQUOTE: 1, FIGCAPTION: 1 };
+
+    function isEditable(el) {
+      return !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" ||
+        el.tagName === "SELECT" || el.isContentEditable);
+    }
+    function closestOf(el, sel) {
+      return el && el.closest ? el.closest(sel) : null;
+    }
+    function reticleLabel(el) {
+      if (!el || el === document.body || el === document.documentElement) return "";
+      if (closestOf(el, "#lightbox:not([hidden])")) return "close";
+      if (closestOf(el, ".media-btn")) return "expand";
+      if (closestOf(el, 'a[href$=".pdf"],a[href$=".PDF"]')) return "download";
+      if (closestOf(el, 'a[href^="mailto:"]')) return "mail";
+      if (closestOf(el, ".project-card")) return "view";
+      if (closestOf(el, ".sysmap-scroll")) return "drag";
+      if (closestOf(el, "a,button")) return "open";
+      return "";
+    }
+    function morphTarget(el) {
+      if (!el || el === document.body || el === document.documentElement) return null;
+      return closestOf(el, "a,button,.sys-layer,.tile,.stack-tile,.card,img,.sysmap-scroll");
+    }
 
     document.addEventListener("mousemove", function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      if (!visible) {
-        visible = true;
-        dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
-        ringX = mouseX;
-        ringY = mouseY;
+      px = e.clientX;
+      py = e.clientY;
+      if (rDot) rDot.style.transform = "translate(" + px + "px," + py + "px)";
+      if (reduceMotion) return;
+      if (!inWin) {
+        inWin = true;
+        reticle.style.opacity = "1";
+      }
+      var t = e.target;
+      if (isEditable(t)) {
+        reticle.style.opacity = "0";
+        if (rBox) rBox.classList.remove("is-on");
+        if (rLabel) rLabel.classList.remove("is-on");
+        boxOn = false;
+        setMag(null);
+        return;
+      }
+      if (!inWin) reticle.style.opacity = "1";
+      var m = morphTarget(t);
+      var ins = pressed ? 4 : 0;
+      if (m) {
+        var r = m.getBoundingClientRect();
+        tx = r.left - 6 + ins;
+        ty = r.top - 6 + ins;
+        tw = Math.max(8, r.width + 12 - ins * 2);
+        th = Math.max(8, r.height + 12 - ins * 2);
+        if (!boxOn) {
+          boxOn = true;
+          bx = tx; by = ty; bw = tw; bh = th;
+          if (rBox) rBox.classList.add("is-on");
+        }
+        if (rBox) rBox.classList.add("is-hot");
+      } else if (t && TEXT_TAGS[t.tagName] && !closestOf(t, "a,button")) {
+        boxOn = false;
+        if (rBox) {
+          rBox.classList.remove("is-on");
+          rBox.classList.remove("is-hot");
+        }
+      } else {
+        tx = px - 14 + ins;
+        ty = py - 14 + ins;
+        tw = Math.max(8, 28 - ins * 2);
+        th = Math.max(8, 28 - ins * 2);
+        if (!boxOn) {
+          boxOn = true;
+          bx = tx; by = ty; bw = tw; bh = th;
+          if (rBox) rBox.classList.add("is-on");
+        }
+        if (rBox) rBox.classList.remove("is-hot");
+      }
+      var label = reticleLabel(t);
+      if (label && rLabel) {
+        rLabel.textContent = label;
+        rLabel.classList.add("is-on");
+      } else if (rLabel) {
+        rLabel.classList.remove("is-on");
+      }
+      setMag(closestOf(t, ".btn"));
+    });
+
+    function setMag(btn) {
+      if (magEl && magEl !== btn) magEl.style.transform = "";
+      magEl = btn;
+      if (magEl && !reduceMotion) {
+        var r = magEl.getBoundingClientRect();
+        var dx = px - (r.left + r.width / 2);
+        var dy = py - (r.top + r.height / 2);
+        var len = Math.sqrt(dx * dx + dy * dy);
+        var pull = len > 1 ? Math.min(4, len * 0.12) : 0;
+        magEl.style.transform = pull
+          ? "translate(" + ((dx / len) * pull).toFixed(1) + "px," + ((dy / len) * pull).toFixed(1) + "px)"
+          : "";
+      } else if (magEl) {
+        magEl.style.transform = "";
+      }
+    }
+
+    document.addEventListener("mousedown", function () { pressed = true; });
+    document.addEventListener("mouseup", function () { pressed = false; });
+    document.addEventListener("mouseleave", function () {
+      inWin = false;
+      reticle.style.opacity = "0";
+      setMag(null);
+    });
+    document.addEventListener("mouseenter", function () {
+      if (!isEditable(document.elementFromPoint(px, py))) {
+        inWin = true;
+        reticle.style.opacity = "1";
       }
     });
 
-    document.addEventListener("mouseleave", function () {
-      dot.style.opacity = "0";
-      ring.style.opacity = "0";
-    });
-    document.addEventListener("mouseenter", function () {
-      dot.style.opacity = "1";
-      ring.style.opacity = "1";
-    });
-
-    // Grow the ring over links, buttons and cards
-    var hoverTargets = document.querySelectorAll("a, button, summary, .card, .stack-tile, .sys-layer, .media-btn");
-    Array.prototype.forEach.call(hoverTargets, function (el) {
-      el.addEventListener("mouseenter", function () { ring.classList.add("is-hover"); });
-      el.addEventListener("mouseleave", function () { ring.classList.remove("is-hover"); });
-    });
-
-    (function loop() {
-      // Dot follows exactly, ring eases behind (slight lerp)
-      dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-      ring.style.transform = "translate(" + ringX.toFixed(2) + "px," + ringY.toFixed(2) + "px)";
-      window.requestAnimationFrame(loop);
-    })();
+    if (!reduceMotion) {
+      (function loop() {
+        bx += (tx - bx) * 0.18;
+        by += (ty - by) * 0.18;
+        bw += (tw - bw) * 0.18;
+        bh += (th - bh) * 0.18;
+        if (rBox) {
+          rBox.style.transform = "translate(" + bx.toFixed(1) + "px," + by.toFixed(1) + "px)";
+          rBox.style.width = Math.max(0, bw).toFixed(1) + "px";
+          rBox.style.height = Math.max(0, bh).toFixed(1) + "px";
+        }
+        if (rLabel && rLabel.classList.contains("is-on")) {
+          rLabel.style.transform =
+            "translate(" + (bx + bw + 10).toFixed(1) + "px," + (by + bh / 2 - 9).toFixed(1) + "px)";
+        }
+        window.requestAnimationFrame(loop);
+      })();
+    }
   }
 
   /* ---------- Back to top ---------- */
