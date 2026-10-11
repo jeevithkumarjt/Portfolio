@@ -1416,6 +1416,10 @@ body.preview .project-media img {
   .section-rule, .timeline-progress { transform: none !important; }
   .btn:active { scale: 1; }
   .nav-indicator { animation: none !important; }
+  .project-card:hover { transform: none; }
+  .project-card:hover .project-media img { transform: none; }
+  .project-grid:hover .project-card:not(:hover) { opacity: 1; }
+  .view-tag { display: none; }
   .marquee-track { animation: none; }
   .reticle { display: none !important; }
   body.has-reticle, body.has-reticle a, body.has-reticle button { cursor: auto; }
@@ -1655,7 +1659,8 @@ body.preview .project-media img {
   place-items: center;
   padding: 24px;
 }
-.lightbox-backdrop { position: absolute; inset: 0; background: #000; opacity: 0.82; }
+.lightbox-backdrop { position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity 240ms var(--ease-out); }
+.lightbox.is-open .lightbox-backdrop { opacity: 0.82; }
 .lightbox-fig {
   position: relative;
   margin: 0;
@@ -1687,4 +1692,81 @@ body.preview .project-media img {
   .is-dim { opacity: 1 !important; }
   .js .sheet-tile { opacity: 1 !important; transform: none !important; }
   .sheet-callout, .sheet-dot { display: none !important; }
+}
+
+/* ============================================================
+   Item 6 — project cards: hover, filter indicator, transitions
+   Flat only. No gradients, shadows, blur or glow.
+   ============================================================ */
+.project-card { position: relative; transition: opacity 240ms var(--ease-out); }
+.project-media { position: relative; }
+.view-tag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 240ms var(--ease-out), transform 240ms var(--ease-out);
+}
+.project-card .chips li { transition: transform 180ms var(--ease-out); }
+.psr dt { transition: color 180ms var(--ease-out); }
+.filter-tabs { position: relative; }
+.filter-tab-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  opacity: 0;
+  transition: transform 320ms var(--ease-out), width 320ms var(--ease-out), opacity 180ms var(--ease-out);
+}
+::view-transition-group(*) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+}
+.project-grid.is-switching { opacity: 0; transition: opacity 150ms var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-6px); }
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 1.5px solid var(--accent);
+    border-radius: 11px;
+    pointer-events: none;
+    clip-path: inset(0 100% 100% 0);
+    transition: clip-path 320ms var(--ease-out);
+  }
+  .project-card:hover::before { clip-path: inset(0 0 0 0); }
+  .project-card:hover .project-media img {
+    transform: scale(1.05);
+    transition: transform 700ms var(--ease-out);
+  }
+  .project-card:hover .view-tag { opacity: 1; transform: translateY(0); }
+  .project-card:hover .chips li { transform: translateY(-2px); }
+  .project-card:hover .chips li:nth-child(1) { transition-delay: 0ms; }
+  .project-card:hover .chips li:nth-child(2) { transition-delay: 30ms; }
+  .project-card:hover .chips li:nth-child(3) { transition-delay: 60ms; }
+  .project-card:hover .chips li:nth-child(4) { transition-delay: 90ms; }
+  .project-card:hover .chips li:nth-child(5) { transition-delay: 120ms; }
+  .project-card:hover .chips li:nth-child(6) { transition-delay: 150ms; }
+  .project-card:hover .chips li:nth-child(7) { transition-delay: 180ms; }
+  .project-card:hover .chips li:nth-child(8) { transition-delay: 210ms; }
+  .project-card:hover .psr dt { color: var(--accent); }
+  .project-grid:hover .project-card:not(:hover) { opacity: 0.55; }
+}
+
+@media (hover: none) {
+  .project-card:active { transform: scale(0.985); }
 }

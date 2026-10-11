@@ -285,28 +285,74 @@
     fills.forEach(fillBar);
   }
 
-  /* ---------- Project filter tabs ---------- */
+  /* ---------- Project filter tabs (indicator + view transitions) ---------- */
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".filter-tab"));
   var cards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
+  var grid = document.getElementById("projectGrid");
+  var tabIndicator = document.querySelector(".filter-tab-indicator");
+
+  cards.forEach(function (card) {
+    if (card.id) card.style.viewTransitionName = "card-" + card.id;
+  });
+
+  function moveTabIndicator(tab) {
+    if (!tabIndicator) return;
+    if (!tab || tab.offsetParent === null) {
+      tabIndicator.style.opacity = "0";
+      return;
+    }
+    tabIndicator.style.opacity = "1";
+    tabIndicator.style.width = tab.offsetWidth + "px";
+    tabIndicator.style.transform = "translateX(" + tab.offsetLeft + "px)";
+  }
+
+  function swapCards(filter) {
+    cards.forEach(function (card) {
+      var category = card.getAttribute("data-category");
+      var show = filter === "all" || category === filter;
+      card.hidden = !show;
+      if (show) card.classList.add("is-visible");
+    });
+  }
+
+  function applyFilter(filter, tab) {
+    tabs.forEach(function (t) {
+      var active = t === tab;
+      t.classList.toggle("is-active", active);
+      t.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    moveTabIndicator(tab);
+    if (!reduceMotion && document.startViewTransition && grid) {
+      document.startViewTransition(function () {
+        swapCards(filter);
+      });
+    } else if (!reduceMotion && grid) {
+      grid.classList.add("is-switching");
+      window.setTimeout(function () {
+        swapCards(filter);
+        var shown = cards.filter(function (c) { return !c.hidden; });
+        shown.forEach(function (c, i) {
+          c.style.transitionDelay = (i * 60) + "ms";
+        });
+        grid.classList.remove("is-switching");
+        window.setTimeout(function () {
+          shown.forEach(function (c) { c.style.transitionDelay = ""; });
+        }, 600);
+      }, 150);
+    } else {
+      swapCards(filter);
+    }
+  }
 
   tabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
-      var filter = tab.getAttribute("data-filter") || "all";
-
-      tabs.forEach(function (t) {
-        var active = t === tab;
-        t.classList.toggle("is-active", active);
-        t.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-
-      cards.forEach(function (card) {
-        var category = card.getAttribute("data-category");
-        var show = filter === "all" || category === filter;
-        card.hidden = !show;
-        if (show) card.classList.add("is-visible");
-      });
+      applyFilter(tab.getAttribute("data-filter") || "all", tab);
     });
   });
+  window.addEventListener("resize", function () {
+    moveTabIndicator(document.querySelector(".filter-tab.is-active"));
+  });
+  moveTabIndicator(document.querySelector(".filter-tab.is-active"));
 
   /* ---------- Skill system map: layer panels ---------- */
   var layerBtns = Array.prototype.slice.call(document.querySelectorAll(".sys-layer"));
@@ -815,23 +861,73 @@
   var lightboxClose = document.getElementById("lightboxClose");
   var lastFocus = null;
 
-  function openLightbox(src, caption, alt) {
+  function openLightbox(src, caption, alt, thumb) {
     if (!lightbox || !lightboxImg) return;
+    lbClosing = false;
     lastFocus = document.activeElement;
     lightboxImg.setAttribute("src", src);
     lightboxImg.setAttribute("alt", alt || caption || "Enlarged project image");
     if (lightboxCap) lightboxCap.textContent = caption || "";
     lightbox.removeAttribute("hidden");
     document.body.style.overflow = "hidden";
+    if (!reduceMotion && thumb && thumb.getBoundingClientRect && lightboxImg.animate) {
+      try {
+        lightboxImg.style.visibility = "hidden";
+        var r1 = thumb.getBoundingClientRect();
+        var r2 = lightboxImg.getBoundingClientRect();
+        lightboxImg.style.visibility = "";
+        if (r1.width > 2 && r2.width > 2) {
+          var dx = r1.left + r1.width / 2 - (r2.left + r2.width / 2);
+          var dy = r1.top + r1.height / 2 - (r2.top + r2.height / 2);
+          lightboxImg.animate([
+            { transform: "translate(" + dx.toFixed(1) + "px," + dy.toFixed(1) + "px) scale(" +
+              (r1.width / r2.width).toFixed(3) + "," + (r1.height / r2.height).toFixed(3) + ")",
+              opacity: 0.4 },
+            { transform: "none", opacity: 1 }
+          ], { duration: 320, easing: "cubic-bezier(.16,1,.3,1)" });
+        }
+      } catch (err) { lightboxImg.style.visibility = ""; }
+    }
+    window.requestAnimationFrame(function () {
+      lightbox.classList.add("is-open");
+    });
     if (lightboxClose) lightboxClose.focus();
   }
 
+  var lbClosing = false;
   function closeLightbox() {
     if (!lightbox || lightbox.hasAttribute("hidden")) return;
-    lightbox.setAttribute("hidden", "");
-    document.body.style.overflow = "";
-    if (lightboxImg) lightboxImg.removeAttribute("src");
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    lightbox.classList.remove("is-open");
+    var done = function () {
+      lbClosing = false;
+      lightbox.setAttribute("hidden", "");
+      document.body.style.overflow = "";
+      if (lightboxImg) lightboxImg.removeAttribute("src");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    if (reduceMotion) {
+      done();
+    } else if (!lbClosing) {
+      lbClosing = true;
+      window.setTimeout(function () {
+        if (lbClosing) done();
+      }, 240);
+    }
+  }
+
+  function trapLightboxTab(e) {
+    if (e.key !== "Tab" || !lightbox || lightbox.hasAttribute("hidden")) return;
+    var f = lightbox.querySelectorAll("button, [href], [tabindex]:not([tabindex='-1'])");
+    f = Array.prototype.filter.call(f, function (el) { return !el.disabled; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   Array.prototype.forEach.call(document.querySelectorAll(".media-btn"), function (btn) {
@@ -840,7 +936,8 @@
       openLightbox(
         btn.getAttribute("data-full"),
         btn.getAttribute("data-caption"),
-        img ? img.getAttribute("alt") : ""
+        img ? img.getAttribute("alt") : "",
+        img || btn
       );
     });
   });
@@ -850,6 +947,7 @@
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeLightbox();
+    trapLightboxTab(e);
   });
 
   /* ---------- Blueprint reticle cursor (fine pointer + hover only) ---------- */
