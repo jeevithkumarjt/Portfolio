@@ -357,13 +357,32 @@
   /* ---------- Skill system map: layer panels ---------- */
   var layerBtns = Array.prototype.slice.call(document.querySelectorAll(".sys-layer"));
   var layerPanels = Array.prototype.slice.call(document.querySelectorAll("[data-layer-panel]"));
+  var plate = document.querySelector(".layer-panels");
+  var plateTitle = document.getElementById("plateTitle");
+  var plateCount = document.getElementById("plateCount");
+  var plateNotch = document.getElementById("plateNotch");
+  var LAYER_ORDER = ["client", "api", "ai", "data", "infra", "growth"];
+  var LAYER_SHORT = { client: "CLIENT", api: "API", ai: "AI LAYER",
+    data: "DATA", infra: "INFRASTRUCTURE", growth: "INTEGRATIONS AND GROWTH" };
+  var currentLayer = null;
+  var switchToken = 0;
 
-  function activateLayer(name, focusPanel) {
-    layerBtns.forEach(function (btn) {
-      var active = btn.getAttribute("data-layer") === name;
-      btn.classList.toggle("is-active", active);
-      btn.setAttribute("aria-expanded", active ? "true" : "false");
-    });
+  function plateHeader(name) {
+    var idx = layerIndex(name);
+    if (plateTitle) {
+      plateTitle.textContent = "LAYER " + ("0" + (idx + 1)).slice(-2) + " · " + (LAYER_SHORT[name] || name.toUpperCase());
+    }
+    if (plateCount) {
+      var panel = layerPanels.filter(function (p) {
+        return p.getAttribute("data-layer-panel") === name;
+      })[0];
+      var n = panel ? panel.querySelectorAll("[data-skill]").length : 0;
+      plateCount.textContent = n + " skills";
+    }
+    moveNotch(name);
+  }
+
+  function showPanelInstant(name, focusPanel) {
     layerPanels.forEach(function (panel) {
       var show = panel.getAttribute("data-layer-panel") === name;
       if (show) {
@@ -375,19 +394,105 @@
     });
   }
 
+  function activateLayer(name, focusPanel, fromName) {
+    var animated = !reduceMotion && !revealAll && fromName && fromName !== name && currentLayer !== null;
+    layerBtns.forEach(function (btn) {
+      var active = btn.getAttribute("data-layer") === name;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-expanded", active ? "true" : "false");
+    });
+    if (!animated) {
+      showPanelInstant(name, focusPanel);
+      currentLayer = name;
+      plateHeader(name);
+      return;
+    }
+    var dir = layerIndex(name) >= layerIndex(fromName) ? 1 : -1;
+    var my = ++switchToken;
+    var oldPanel = layerPanels.filter(function (p) {
+      return p.getAttribute("data-layer-panel") === fromName;
+    })[0];
+    var newPanel = layerPanels.filter(function (p) {
+      return p.getAttribute("data-layer-panel") === name;
+    })[0];
+    travelTo(fromName, name);
+    plateHeader(name);
+    if (oldPanel) {
+      var oldTiles = oldPanel.querySelectorAll(".tile");
+      Array.prototype.forEach.call(oldTiles, function (t) {
+        t.style.setProperty("--tx", (8 * dir) + "px");
+        t.classList.add("tile-leave");
+      });
+    }
+    window.setTimeout(function () {
+      if (my !== switchToken) return;
+      showPanelInstant(name, focusPanel);
+      currentLayer = name;
+      var fresh = newPanel ? newPanel.querySelectorAll(".tile") : [];
+      Array.prototype.forEach.call(fresh, function (t, i) {
+        t.style.setProperty("--tx", (12 * dir) + "px");
+        t.classList.add("tile-enter");
+      });
+      if (plate) {
+        plate.style.height = plate.offsetHeight + "px";
+        void plate.offsetHeight;
+        plate.style.height = plate.scrollHeight + "px";
+        window.setTimeout(function () {
+          if (my === switchToken && plate) plate.style.height = "";
+        }, 360);
+      }
+      Array.prototype.forEach.call(fresh, function (t, i) {
+        window.setTimeout(function () {
+          if (my !== switchToken) return;
+          t.classList.add("go");
+          window.setTimeout(function () {
+            t.classList.remove("tile-enter", "go");
+            t.style.removeProperty("--tx");
+          }, 420);
+        }, i * 40);
+      });
+      if (oldPanel) {
+        Array.prototype.forEach.call(oldPanel.querySelectorAll(".tile-leave"), function (t) {
+          t.classList.remove("tile-leave");
+          t.style.removeProperty("--tx");
+        });
+      }
+    }, 150);
+  }
+
   if (layerBtns.length && layerPanels.length) {
     // No-JS shows every panel; with JS, start on the first layer only
     activateLayer(layerBtns[0].getAttribute("data-layer"), false);
-    layerBtns.forEach(function (btn) {
+    layerBtns.forEach(function (btn, bi) {
       var name = btn.getAttribute("data-layer");
-      btn.addEventListener("click", function () { activateLayer(name, false); });
+      btn.addEventListener("click", function () { activateLayer(name, false, currentLayer); });
       btn.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          activateLayer(name, false);
+          activateLayer(name, false, currentLayer);
+        } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          e.preventDefault();
+          var n = layerBtns[(bi + 1) % layerBtns.length];
+          n.focus();
+          activateLayer(n.getAttribute("data-layer"), false, currentLayer);
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          var p = layerBtns[(bi - 1 + layerBtns.length) % layerBtns.length];
+          p.focus();
+          activateLayer(p.getAttribute("data-layer"), false, currentLayer);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          layerBtns[0].focus();
+          activateLayer(layerBtns[0].getAttribute("data-layer"), false, currentLayer);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          var l = layerBtns[layerBtns.length - 1];
+          l.focus();
+          activateLayer(l.getAttribute("data-layer"), false, currentLayer);
         }
       });
     });
+    window.addEventListener("resize", function () { moveNotch(currentLayer); });
   }
 
     /* ---------- Brand logos (simple-icons paths, progressive enhancement) ---------- */
@@ -428,17 +533,18 @@
 
   function paintLogos() {
     Array.prototype.forEach.call(document.querySelectorAll(".tile[data-skill]"), function (li) {
-      if (li.querySelector(".tile-logo")) return;
-      var key = ((li.getAttribute("data-skill") || "").split(/\s+/))[0];
-      var d = LOGOS[key];
+      if (li.querySelector(".lvl-row")) return;
       var lvl = li.querySelector(".lvl");
-      if (!d || !lvl) return;
+      if (!lvl) return;
       var row = document.createElement("span");
       row.className = "lvl-row";
       li.insertBefore(row, lvl);
+      row.appendChild(lvl);
+      var key = ((li.getAttribute("data-skill") || "").split(/\s+/))[0];
+      var d = LOGOS[key];
+      if (!d) return;
       row.insertAdjacentHTML("afterbegin",
         '<svg class="tile-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + d + "</svg>");
-      row.appendChild(lvl);
     });
     Array.prototype.forEach.call(document.querySelectorAll(".tools-row [data-logo]"), function (li) {
       if (li.querySelector(".tile-logo")) return;
@@ -703,6 +809,139 @@
     window.addEventListener("scroll", hideCallout, { passive: true });
   })();
 
+  /* ---------- Item 7: pips, match badges, travel square, drag scroll ---------- */
+  var sysSvg = document.querySelector(".sysmap");
+  var sysNS = "http://www.w3.org/2000/svg";
+
+  var PIP_LEVELS = { "Production": 3, "Built locally": 2, "Working knowledge": 1, "In progress": 0 };
+  function paintPips() {
+    Array.prototype.forEach.call(document.querySelectorAll(".tile .lvl"), function (lvl) {
+      if (lvl.parentNode.querySelector(".skill-pips")) return;
+      var text = (lvl.textContent || "").trim();
+      var n = PIP_LEVELS[text];
+      if (n === undefined) return;
+      var wrap = document.createElement("span");
+      wrap.className = "skill-pips";
+      wrap.setAttribute("aria-hidden", "true");
+      for (var i = 0; i < 3; i++) {
+        var pip = document.createElement("span");
+        pip.className = "pip" + (text === "In progress" ? " is-dash" : (i < n ? " is-fill" : ""));
+        wrap.appendChild(pip);
+      }
+      lvl.parentNode.insertBefore(wrap, lvl.nextSibling);
+    });
+  }
+  paintPips();
+
+  var matchBadges = [];
+  function layerIndex(name) { return LAYER_ORDER.indexOf(name); }
+  function paintBadges() {
+    if (!sysSvg) return;
+    layerBtns.forEach(function (btn) {
+      var t = document.createElementNS(sysNS, "text");
+      t.setAttribute("class", "sys-match");
+      t.setAttribute("text-anchor", "end");
+      t.setAttribute("visibility", "hidden");
+      t.setAttribute("aria-hidden", "true");
+      btn.appendChild(t);
+      matchBadges.push({ btn: btn, el: t });
+    });
+  }
+  paintBadges();
+
+  function updateMatchBadges(counts) {
+    matchBadges.forEach(function (b) {
+      var name = b.btn.getAttribute("data-layer");
+      var n = counts ? (counts[name] || 0) : 0;
+      if (!counts || !n) {
+        b.el.setAttribute("visibility", "hidden");
+        return;
+      }
+      var i = layerIndex(name);
+      b.el.setAttribute("x", 8 + i * 220 + 184);
+      b.el.setAttribute("y", 40 + 30);
+      b.el.textContent = n;
+      b.el.removeAttribute("visibility");
+      b.el.classList.remove("pop");
+      try { window.getComputedStyle(b.el).opacity; } catch (err) {}
+      b.el.classList.add("pop");
+    });
+  }
+
+  var travEl = null;
+  function travelTo(fromName, toName) {
+    if (reduceMotion || revealAll || !sysSvg) return;
+    var fa = layerBtns.filter(function (b) { return b.getAttribute("data-layer") === fromName; })[0];
+    var fb = layerBtns.filter(function (b) { return b.getAttribute("data-layer") === toName; })[0];
+    if (!fa || !fb) return;
+    var ra = fa.getBoundingClientRect(), rb = fb.getBoundingClientRect();
+    var sr = sysSvg.getBoundingClientRect();
+    if (!sr.width) return;
+    var sx = 1320 / sr.width, sy = 300 / sr.height;
+    var x0 = (ra.left + ra.width / 2 - sr.left) * sx;
+    var y0 = (ra.top + ra.height / 2 - sr.top) * sy;
+    var x1 = (rb.left + rb.width / 2 - sr.left) * sx;
+    var y1 = (rb.top + rb.height / 2 - sr.top) * sy;
+    if (!travEl) {
+      travEl = document.createElementNS(sysNS, "rect");
+      travEl.setAttribute("width", "8");
+      travEl.setAttribute("height", "8");
+      travEl.setAttribute("class", "sys-trav");
+      travEl.style.opacity = "0";
+      sysSvg.appendChild(travEl);
+    }
+    var t0 = null;
+    travEl.style.opacity = "1";
+    var step = function (ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / 360, 1);
+      travEl.setAttribute("x", (x0 + (x1 - x0) * p - 4).toFixed(1));
+      travEl.setAttribute("y", (y0 + (y1 - y0) * p - 4).toFixed(1));
+      if (p < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        travEl.style.opacity = "0";
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  function moveNotch(name) {
+    if (!plateNotch || !plate) return;
+    var btn = layerBtns.filter(function (b) { return b.getAttribute("data-layer") === name; })[0];
+    if (!btn) return;
+    var pr = plate.getBoundingClientRect();
+    var br = btn.getBoundingClientRect();
+    var x = br.left + br.width / 2 - pr.left - 5;
+    x = Math.max(4, Math.min(pr.width - 14, x));
+    plateNotch.style.transform = "translateX(" + Math.round(x) + "px)";
+  }
+
+  var sysScroller = document.querySelector(".sysmap-scroll");
+  if (sysScroller && finePointer && !reduceMotion) {
+    var dragging = false, dragX = 0, dragL = 0, dragMoved = 0;
+    sysScroller.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0) return;
+      dragging = true;
+      dragMoved = 0;
+      dragX = e.clientX;
+      dragL = sysScroller.scrollLeft;
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - dragX;
+      if (Math.abs(dx) > dragMoved) dragMoved = Math.abs(dx);
+      sysScroller.scrollLeft = dragL - dx;
+    });
+    window.addEventListener("pointerup", function () { dragging = false; });
+    sysScroller.addEventListener("click", function (e) {
+      if (dragMoved > 6) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
   /* ---------- Skill search: filter skills, highlight proof ---------- */
   var skillInput = document.getElementById("skillSearch");
   var skillClear = document.getElementById("skillClear");
@@ -715,7 +954,12 @@
   }
 
   function clearSkillSearch() {
-    skillItems.forEach(function (li) { li.removeAttribute("hidden"); });
+    skillItems.forEach(function (li) {
+      li.removeAttribute("hidden");
+      li.classList.remove("is-match");
+      li.classList.remove("is-unmatch");
+    });
+    updateMatchBadges(null);
     layerPanels.forEach(function (panel) { panel.removeAttribute("hidden"); });
     if (layerBtns.length) activateLayer(layerBtns[0].getAttribute("data-layer"), false);
     proofEls.forEach(function (el) {
@@ -756,28 +1000,28 @@
     }
     if (skillClear) skillClear.removeAttribute("hidden");
 
-    // 1) Filter skill rows by name substring; show only panels with matches
+    // 1) Filter skill rows: matches lift, the rest dim; keep all panels open
     var visibleCount = 0;
-    var panelsWithHits = {};
+    var layerCounts = {};
     skillItems.forEach(function (li) {
       var nameEl = li.querySelector(".sk-name");
       var match = norm(nameEl ? nameEl.textContent : "").indexOf(q) !== -1;
+      li.classList.toggle("is-match", match);
+      li.classList.toggle("is-unmatch", !match);
+      li.removeAttribute("hidden");
       if (match) {
-        li.removeAttribute("hidden");
         visibleCount++;
         var panel = li.closest("[data-layer-panel]");
-        if (panel) panelsWithHits[panel.getAttribute("data-layer-panel")] = true;
-      } else {
-        li.setAttribute("hidden", "");
+        if (panel) {
+          var key = panel.getAttribute("data-layer-panel");
+          layerCounts[key] = (layerCounts[key] || 0) + 1;
+        }
       }
     });
     layerPanels.forEach(function (panel) {
-      if (panelsWithHits[panel.getAttribute("data-layer-panel")]) {
-        panel.removeAttribute("hidden");
-      } else {
-        panel.setAttribute("hidden", "");
-      }
+      panel.removeAttribute("hidden");
     });
+    updateMatchBadges(visibleCount ? layerCounts : null);
 
     // 2) Exact skill chosen -> highlight proof (projects + experience)
     var exactKeys = [];
@@ -830,12 +1074,18 @@
         var tiles = tileWrap.querySelectorAll(".tile");
         Array.prototype.forEach.call(tiles, function (t) {
           if (t.offsetParent === null) return;
+          if (t.classList.contains("tile-leave") || t.classList.contains("tile-enter") ||
+            t.classList.contains("is-match") || t.classList.contains("is-unmatch")) {
+            t.style.transform = "";
+            t.classList.remove("is-near");
+            return;
+          }
           var r = t.getBoundingClientRect();
           var dx = e.clientX - (r.left + r.width / 2);
           var dy = e.clientY - (r.top + r.height / 2);
           var d = Math.sqrt(dx * dx + dy * dy);
           if (d < 150 && d > 1) {
-            var pull = (1 - d / 150) * 4;
+            var pull = (1 - d / 150) * 3;
             t.style.transform =
               "translate(" + ((dx / d) * pull).toFixed(1) + "px," + ((dy / d) * pull).toFixed(1) + "px)";
             t.classList.toggle("is-near", d < 100);
