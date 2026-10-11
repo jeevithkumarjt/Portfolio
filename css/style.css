@@ -1,7 +1,6 @@
 /* ============================================================
    Jeevithkumar R — Portfolio
    Dark neutral base · accent #E8590C · flat surfaces
-   No gradients · no shadows · no blur · no glow
    ============================================================ */
 
 /* Self-hosted fonts: Inter + JetBrains Mono, latin subsets, display=swap */
@@ -1499,7 +1498,7 @@ body.preview .project-media img {
 
 /* ============================================================
    Portfolio update — experience open, system map, lightbox
-   Flat surfaces only. No gradients, shadows, blur or glow.
+   Flat surfaces only.
    ============================================================ */
 
 [hidden] { display: none !important; }
@@ -1765,7 +1764,7 @@ body.preview .project-media img {
 
 /* ============================================================
    Item 6 — project cards: hover, filter indicator, transitions
-   Flat only. No gradients, shadows, blur or glow.
+   Flat only.
    ============================================================ */
 .project-card { position: relative; transition: opacity 240ms var(--ease-out); }
 .project-media { position: relative; }
@@ -1842,7 +1841,7 @@ body.preview .project-media img {
 
 /* ============================================================
    Item 7 — layer tabs as nodes, plate panel, pips, match states
-   Flat only. No gradients, shadows, blur or glow.
+   Flat only.
    ============================================================ */
 .sys-layer rect { fill: transparent; stroke: var(--border-strong); }
 .sys-layer:hover rect { stroke: var(--text); }
