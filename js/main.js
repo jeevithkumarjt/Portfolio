@@ -5,6 +5,8 @@
 (function () {
   "use strict";
 
+  document.documentElement.classList.add("js");
+
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer = window.matchMedia("(pointer: fine)").matches;
   var revealAll = /[?&]reveal=all/.test(window.location.search);
@@ -87,6 +89,19 @@
     .filter(Boolean);
 
   if ("IntersectionObserver" in window && sections.length) {
+    var navIndicator = document.querySelector(".nav-indicator");
+    var currentLink = null;
+    var moveIndicator = function (link) {
+      currentLink = link;
+      if (!navIndicator) return;
+      if (!link || link.offsetParent === null) {
+        navIndicator.style.opacity = "0";
+        return;
+      }
+      navIndicator.style.opacity = "1";
+      navIndicator.style.width = link.offsetWidth + "px";
+      navIndicator.style.transform = "translateX(" + link.offsetLeft + "px)";
+    };
     var sectionObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -97,6 +112,7 @@
             link.classList.toggle("is-active", active);
             if (active) {
               link.setAttribute("aria-current", "true");
+              moveIndicator(link);
             } else {
               link.removeAttribute("aria-current");
             }
@@ -106,10 +122,65 @@
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
     sections.forEach(function (section) { sectionObserver.observe(section); });
+    window.addEventListener("resize", function () { moveIndicator(currentLink); });
   }
 
+  /* ---------- Experience timeline: growing line + filling nodes ---------- */
+  var timeline = document.querySelector(".timeline");
+  var tlProgress = document.querySelector(".timeline-progress");
+  var tlItems = Array.prototype.slice.call(document.querySelectorAll(".exp-item"));
+  var viewTimeline = "CSS" in window && window.CSS.supports &&
+    window.CSS.supports("animation-timeline: view()");
+
+  function paintTlNodes() {
+    var vh = window.innerHeight || 800;
+    tlItems.forEach(function (it) {
+      var b = it.getBoundingClientRect();
+      it.classList.toggle("is-past", b.top < vh * 0.6 && b.bottom > 0);
+    });
+  }
+
+  if (timeline && tlProgress && !reduceMotion && !revealAll) {
+    if (!viewTimeline) {
+      var tlTicking = false;
+      var paintTlLine = function () {
+        tlTicking = false;
+        var r = timeline.getBoundingClientRect();
+        var vh = window.innerHeight || 800;
+        var p = (vh * 0.85 - r.top) / (r.height || 1);
+        p = Math.max(0, Math.min(1, p));
+        tlProgress.style.transform = "scaleY(" + p.toFixed(3) + ")";
+        paintTlNodes();
+      };
+      var onTlScroll = function () {
+        if (!tlTicking) {
+          tlTicking = true;
+          window.requestAnimationFrame(paintTlLine);
+        }
+      };
+      window.addEventListener("scroll", onTlScroll, { passive: true });
+      window.addEventListener("resize", onTlScroll);
+      paintTlLine();
+    } else {
+      var nodeTicking = false;
+      var onNodeScroll = function () {
+        if (!nodeTicking) {
+          nodeTicking = true;
+          window.requestAnimationFrame(function () {
+            nodeTicking = false;
+            paintTlNodes();
+          });
+        }
+      };
+      window.addEventListener("scroll", onNodeScroll, { passive: true });
+      window.addEventListener("resize", onNodeScroll);
+      paintTlNodes();
+    }
+  }
   /* ---------- Reveal on scroll (play once, staggered groups) ---------- */
-  var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  var revealEls = Array.prototype.slice.call(
+    document.querySelectorAll(".reveal, .mask-context, .section-rule")
+  );
 
   function showAllReveals() {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
@@ -120,7 +191,7 @@
   } else {
     // Stagger cards that share a parent grid
     var staggerParents = document.querySelectorAll(
-      ".about-cards, .project-grid, .skill-groups, .edu-grid, .timeline, .top-skills"
+      ".about-cards, .project-grid, .edu-grid, .timeline"
     );
     Array.prototype.forEach.call(staggerParents, function (parent) {
       var kids = parent.querySelectorAll(":scope > .reveal");
