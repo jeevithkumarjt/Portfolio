@@ -736,6 +736,12 @@ body.has-cursor .cursor-ring { opacity: 1; }
   margin-top: 10px;
 }
 
+.contact-sub {
+  color: var(--text-muted);
+  max-width: 62ch;
+  margin-top: 14px;
+}
+
 /* ---------- Contact ---------- */
 .contact-grid {
   display: grid;

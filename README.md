@@ -7,7 +7,7 @@ I lead a five-person development team, run six production platforms and have shi
 websites. I work on the frontend, the backend, the database and the server, so nothing gets lost
 between a requirement and something running in production.
 
-Open to full-time roles — remote or on-site. Based in Tamil Nadu, India.
+Based in Tamil Nadu, India.
 
 ---
 
