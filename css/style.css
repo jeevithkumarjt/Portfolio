@@ -62,6 +62,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --bg: #0C0C0D;
   --bg-alt: #111113;
   --surface: #17171A;
@@ -75,6 +76,10 @@
   --accent-ink: #140A03;
   --focus: #F5701F;
 
+  --reticle-corner: rgba(237, 237, 239, 0.7);
+  --sheet-btn-ink: rgba(237, 237, 239, 0.85);
+  --tile-logo-ink: rgba(237, 237, 239, 0.85);
+
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -86,6 +91,27 @@
   --ease-out: cubic-bezier(.16, 1, .3, 1);
   --ease-in-out: cubic-bezier(.65, 0, .35, 1);
   --dur: 600ms;
+}
+
+/* ---------- Light theme (flat, same accent) ---------- */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #F4F3F0;
+  --bg-alt: #ECEAE6;
+  --surface: #FFFFFF;
+  --surface-2: #F1EFEB;
+  --border: #DCD8D1;
+  --border-strong: #C9C4BB;
+  --text: #1B1B1F;
+  --text-muted: #5B5853;
+  --accent: #C2410C;
+  --accent-hover: #B03A0B;
+  --accent-ink: #FFFFFF;
+  --focus: #C2410C;
+
+  --reticle-corner: rgba(20, 20, 26, 0.7);
+  --sheet-btn-ink: rgba(20, 20, 26, 0.8);
+  --tile-logo-ink: rgba(20, 20, 26, 0.85);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -207,7 +233,7 @@ body.has-reticle select { cursor: auto; }
   position: absolute;
   width: 8px;
   height: 8px;
-  border: 0 solid rgba(237, 237, 239, 0.7);
+  border: 0 solid var(--reticle-corner);
 }
 .rc-tl { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
 .rc-tr { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
@@ -338,6 +364,36 @@ body.has-reticle select { cursor: auto; }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Theme toggle (sun/moon, flat) */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 240ms var(--ease-out);
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:active { transform: scale(0.92); }
+html[data-theme="light"] .theme-toggle svg { transform: rotate(24deg); }
+.theme-icon-moon { display: none; }
+.theme-icon-sun { display: block; }
+html[data-theme="light"] .theme-icon-sun { display: none; }
+html[data-theme="light"] .theme-icon-moon { display: block; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -706,7 +762,7 @@ body.has-reticle select { cursor: auto; }
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  color: rgba(237, 237, 239, 0.85);
+  color: var(--sheet-btn-ink);
   cursor: pointer;
   padding: 4px 2px;
   font: inherit;
@@ -1338,6 +1394,51 @@ body.preview .project-media img {
 }
 
 /* ============================================================
+   Floating scroll-to-top (bottom-right, flat ring + arrow)
+   ============================================================ */
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: transform 200ms var(--ease-out), border-color 180ms var(--ease-out), opacity 200ms var(--ease-out);
+}
+.scroll-top.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.scroll-top:hover,
+.scroll-top:focus-visible { border-color: var(--accent); color: var(--accent); }
+.scroll-top:active { transform: translateY(0) scale(0.94); }
+.scroll-top svg { width: 18px; height: 18px; }
+.scroll-top .st-track, .scroll-top .st-arc { stroke-width: 1.6; }
+.scroll-top .st-track { fill: none; stroke: var(--border); }
+.scroll-top .st-arc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 120ms linear;
+}
+.scroll-top .st-arrow { fill: currentColor; }
+
+/* ============================================================
    Breakpoints — mobile first
    ============================================================ */
 @media (max-width: 899px) {
@@ -1438,7 +1539,7 @@ body.preview .project-media img {
 
   body { background: #fff; color: #111; font-size: 10.5pt; line-height: 1.4; }
 
-  .scroll-progress, .reticle, .skip-link,
+  .scroll-progress, .reticle, .skip-link, .scroll-top,
   .site-header, .nav-toggle, .marquee-section,
   .hero-actions, .contact-actions, .filter-tabs,
   .project-media, .social-list, .footer-meta,
@@ -1697,7 +1798,7 @@ body.preview .project-media img {
   width: 16px;
   height: 16px;
   flex: none;
-  color: rgba(237, 237, 239, 0.85);
+  color: var(--tile-logo-ink);
 }
 .lvl-row {
   display: flex;
