@@ -338,22 +338,10 @@
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".filter-tab"));
   var cards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
   var grid = document.getElementById("projectGrid");
-  var tabIndicator = document.querySelector(".filter-tab-indicator");
 
   cards.forEach(function (card) {
     if (card.id) card.style.viewTransitionName = "card-" + card.id;
   });
-
-  function moveTabIndicator(tab) {
-    if (!tabIndicator) return;
-    if (!tab || tab.offsetParent === null) {
-      tabIndicator.style.opacity = "0";
-      return;
-    }
-    tabIndicator.style.opacity = "1";
-    tabIndicator.style.width = tab.offsetWidth + "px";
-    tabIndicator.style.transform = "translateX(" + tab.offsetLeft + "px)";
-  }
 
   function swapCards(filter) {
     cards.forEach(function (card) {
@@ -370,7 +358,6 @@
       t.classList.toggle("is-active", active);
       t.setAttribute("aria-pressed", active ? "true" : "false");
     });
-    moveTabIndicator(tab);
     if (!reduceMotion && document.startViewTransition && grid) {
       document.startViewTransition(function () {
         swapCards(filter);
@@ -398,10 +385,6 @@
       applyFilter(tab.getAttribute("data-filter") || "all", tab);
     });
   });
-  window.addEventListener("resize", function () {
-    moveTabIndicator(document.querySelector(".filter-tab.is-active"));
-  });
-  moveTabIndicator(document.querySelector(".filter-tab.is-active"));
 
   /* ---------- Skill system map: layer panels ---------- */
   var layerBtns = Array.prototype.slice.call(document.querySelectorAll(".sys-layer"));
@@ -1285,8 +1268,12 @@
       if (closestOf(el, 'a[href^="http"]')) return "open";
       if (closestOf(el, ".sys-layer")) return "open";
       if (closestOf(el, ".sysmap-scroll")) return "drag";
-      if (closestOf(el, ".sys-layer")) return "open";
-      if (closestOf(el, ".sheet-tile-btn")) return "view";
+      if (closestOf(el, ".sheet-tile-btn")) {
+        var sb = closestOf(el, ".sheet-tile-btn");
+        var sn = sb.querySelector(".sheet-tile-label");
+        if (sn && sn.textContent) return sn.textContent.trim();
+        return sb.getAttribute("data-tech") || "view";
+      }
       if (closestOf(el, ".filter-tab")) return "filter";
       if (closestOf(el, ".nav-toggle")) return "menu";
       if (closestOf(el, ".theme-toggle")) return "theme";

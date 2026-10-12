@@ -306,7 +306,7 @@ body.has-reticle select { cursor: auto; }
   border-radius: 6px;
   font-size: 0.94rem;
   color: var(--text-muted);
-  transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  transition: color 280ms var(--ease-out), background-color 280ms var(--ease-out);
 }
 .nav-list a:hover { color: var(--text); background: var(--surface); }
 .nav-list a.is-active { color: var(--accent); }
@@ -359,7 +359,7 @@ body.has-reticle select { cursor: auto; }
   height: 2px;
   width: 100%;
   background: var(--text);
-  transition: transform 200ms var(--ease-out), opacity 150ms var(--ease-out);
+  transition: transform 300ms var(--ease-out), opacity 150ms var(--ease-out);
 }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
@@ -379,21 +379,25 @@ body.has-reticle select { cursor: auto; }
   border-radius: 8px;
   color: var(--text);
   cursor: pointer;
-  transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+  transition: transform 300ms var(--ease-out), border-color 300ms var(--ease-out), color 300ms var(--ease-out);
 }
 .theme-toggle svg {
   width: 18px;
   height: 18px;
-  transition: transform 240ms var(--ease-out);
+  transition: transform 300ms var(--ease-out), opacity 180ms var(--ease-out);
 }
 .theme-toggle:hover,
 .theme-toggle:focus-visible { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:hover svg { transform: scale(1.12) rotate(12deg); }
 .theme-toggle:active { transform: scale(0.92); }
-html[data-theme="light"] .theme-toggle svg { transform: rotate(24deg); }
-.theme-icon-moon { display: none; }
 .theme-icon-sun { display: block; }
+.theme-icon-moon { display: none; }
+.theme-toggle:hover .theme-icon-sun { display: none; }
+.theme-toggle:hover .theme-icon-moon { display: block; }
 html[data-theme="light"] .theme-icon-sun { display: none; }
 html[data-theme="light"] .theme-icon-moon { display: block; }
+html[data-theme="light"] .theme-toggle:hover .theme-icon-sun { display: block; }
+html[data-theme="light"] .theme-toggle:hover .theme-icon-moon { display: none; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -412,7 +416,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
   border: 1px solid transparent;
   cursor: pointer;
   text-align: center;
-  transition: border-color 180ms var(--ease-out), color 180ms var(--ease-out), transform 180ms var(--ease-out);
+  transition: border-color 300ms var(--ease-out), color 300ms var(--ease-out), transform 300ms var(--ease-out);
 }
 .btn::before {
   content: "";
@@ -429,7 +433,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
 .btn:active { scale: 0.98; }
 .btn .btn-arrow {
   display: inline-block;
-  transition: transform 180ms var(--ease-out);
+  transition: transform 320ms var(--ease-out);
 }
 .btn:hover .btn-arrow,
 .btn:focus-visible .btn-arrow { transform: translateX(4px); }
@@ -766,6 +770,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
   cursor: pointer;
   padding: 4px 2px;
   font: inherit;
+  transition: border-color 280ms var(--ease-out), color 280ms var(--ease-out);
 }
 .sheet-tile-btn svg { width: 24px; height: 24px; flex: none; }
 .sheet-tile-label {
@@ -894,7 +899,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
-  transition: border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+  transition: border-color 280ms var(--ease-out), transform 280ms var(--ease-out);
 }
 .card:hover {
   border-color: var(--accent);
@@ -1106,7 +1111,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
   font-weight: 500;
   color: var(--text-muted);
   cursor: pointer;
-  transition: border-color 150ms var(--ease-out), color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  transition: border-color 280ms var(--ease-out), color 280ms var(--ease-out), background-color 280ms var(--ease-out);
 }
 .filter-tab:hover { color: var(--text); border-color: var(--accent); }
 .filter-tab.is-active {
@@ -1263,7 +1268,7 @@ html[data-theme="light"] .theme-icon-moon { display: block; }
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text-muted);
-  transition: border-color 150ms var(--ease-out), color 150ms var(--ease-out);
+  transition: border-color 280ms var(--ease-out), color 280ms var(--ease-out);
 }
 .social-list a:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -1415,7 +1420,7 @@ body.preview .project-media img {
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-  transition: transform 200ms var(--ease-out), border-color 180ms var(--ease-out), opacity 200ms var(--ease-out);
+  transition: transform 300ms var(--ease-out), border-color 280ms var(--ease-out), opacity 300ms var(--ease-out);
 }
 .scroll-top.is-shown {
   opacity: 1;
@@ -1434,7 +1439,7 @@ body.preview .project-media img {
   stroke-linecap: round;
   stroke-dasharray: 100 100;
   stroke-dashoffset: 100;
-  transition: stroke-dashoffset 120ms linear;
+  transition: stroke-dashoffset 280ms linear;
 }
 .scroll-top .st-arrow { fill: currentColor; }
 
@@ -1710,7 +1715,7 @@ body.preview .project-media img {
   fill: var(--surface);
   stroke: var(--border);
   stroke-width: 1.5;
-  transition: stroke 150ms var(--ease-out);
+  transition: stroke 260ms var(--ease-out);
 }
 .sys-layer:hover rect,
 .sys-layer.is-active rect { stroke: var(--accent); stroke-width: 2; }
@@ -1740,7 +1745,7 @@ body.preview .project-media img {
   display: grid;
   gap: 8px;
   align-content: start;
-  transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out), opacity 180ms var(--ease-out);
+  transition: transform 280ms var(--ease-out), border-color 280ms var(--ease-out), opacity 280ms var(--ease-out);
 }
 .tile:hover,
 .tile:focus-within,
@@ -1758,7 +1763,7 @@ body.preview .project-media img {
   font-size: 0.72rem;
   margin: 2px 4px 2px 0;
   transform: translateY(4px);
-  transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+  transition: transform 280ms var(--ease-out), border-color 280ms var(--ease-out), color 280ms var(--ease-out);
 }
 .sk-used a:hover { color: var(--accent); border-color: var(--accent); }
 .tile:hover .sk-used a,
@@ -1888,17 +1893,6 @@ body.preview .project-media img {
 }
 .project-card .chips li { transition: transform 180ms var(--ease-out); }
 .psr dt { transition: color 180ms var(--ease-out); }
-.filter-tabs { position: relative; }
-.filter-tab-indicator {
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background: var(--accent);
-  opacity: 0;
-  transition: transform 320ms var(--ease-out), width 320ms var(--ease-out), opacity 180ms var(--ease-out);
-}
 ::view-transition-group(*) {
   animation-duration: 450ms;
   animation-timing-function: cubic-bezier(.16, 1, .3, 1);

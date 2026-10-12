@@ -9,11 +9,11 @@
   <meta name="theme-color" content="#0C0C0D">
   <script>
   (function () {
-    var t = null;
-    try { t = localStorage.getItem("pf-theme"); } catch (e) {}
-    if (t !== "light" && t !== "dark") {
-      t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) ? "light" : "dark";
-    }
+    var t = "dark";
+    try {
+      var s = localStorage.getItem("pf-theme");
+      if (s === "light" || s === "dark") t = s;
+    } catch (e) {}
     document.documentElement.setAttribute("data-theme", t);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute("content", t === "light" ? "#F4F3F0" : "#0C0C0D");
@@ -495,7 +495,6 @@
         <h2 class="section-title mask-context" id="projectsTitle"><span class="mask-line"><span class="mask-inner">Things I have shipped.</span></span></h2>
 
         <div class="filter-tabs reveal" role="group" aria-label="Filter projects">
-          <span class="filter-tab-indicator" aria-hidden="true"></span>
           <button class="filter-tab is-active" type="button" data-filter="all" aria-pressed="true">All</button>
           <button class="filter-tab" type="button" data-filter="ai" aria-pressed="false">AI</button>
           <button class="filter-tab" type="button" data-filter="dashboards" aria-pressed="false">Dashboards</button>
